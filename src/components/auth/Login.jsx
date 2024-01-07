@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
         setIsLoading(true);
 
-        const { error, data } = await login(email, password);
+        const { error } = await login(email, password);
 
         if (error) {
             alert(error);

@@ -16,7 +16,7 @@ export const useAuthStore = create((set, get) => ({
 
     setLoading: (loading) => set({ loading }),
 
-    isLoggedIn: () => get().allUserData !== null,
+    isLoggedIn: () => !!Cookies.get('access_Token'),
 }));
 
 if (is_Dev) {
