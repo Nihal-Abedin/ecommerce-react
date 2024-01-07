@@ -113,6 +113,11 @@ export const setAuthUser = (access_Token, refresh_Token) => {
     useAuthStore.getState().setLoading(false)
 }
 
+
+/**
+ * 
+ * @returns access_Token as access, refresh_Token as refresh
+ */
 export const getRefreshToken = async () => {
     const refresh_Token = Cookies.get("refresh_Token");
 
@@ -121,6 +126,13 @@ export const getRefreshToken = async () => {
     return res.data
 }
 
+
+/**
+ * 
+ * @param {"access_Token"} access_Token 
+ * @returns true if expired
+ * @returns false if not expired
+ */
 export const isAccessTokenExpired = async (access_Token) => {
     try {
         const decodedToken = jwt_decode(access_Token)
