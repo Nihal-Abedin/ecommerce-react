@@ -12,7 +12,15 @@ export const login = async (email, password) => {
         console.log(data);
         if (status === 200) {
             const loginuser = jwtDecode(data.access);
-            useAuthStore.getState().setUser(loginuser);
+            const cookieData = {
+                user_id: loginuser.user_id,
+                full_name: loginuser.full_name,
+                email: loginuser.email,
+                username: loginuser.username,
+                vendor_id: loginuser.vendor_id,
+            };
+            Cookies.set('user', JSON.stringify(cookieData));
+            useAuthStore.getState().setUser(cookieData);
             setAuthUser(data.access, data.refresh);
 
             // ALERT LOGGED IN SUCCESS
