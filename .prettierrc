@@ -1,17 +1,17 @@
 {
-  "plugins": ["prettier-plugin-react"],
-  "pluginSearchDirs": ["."],
-  "overrides": [
-      { "files": "*.js", "options": { "parser": "babel" } },
-      { "files": "*.jsx", "options": { "parser": "babel" } }
-  ],
-  
-  "trailingComma": "es5",
-  "tabWidth": 4,
-  "semi": true,
-  "singleQuote": true,
-  "printWidth": 120,
-  "bracketSameLine": true,
-  "jsxBracketSameLine": false,
-  "jsxSingleQuote": false
+    "plugins": ["eslint-plugin-prettier"],
+    "pluginSearchDirs": ["."],
+    "overrides": [
+        { "files": "*.js", "options": { "parser": "babel" } },
+        { "files": "*.jsx", "options": { "parser": "babel" } }
+    ],
+
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 120,
+    "bracketSameLine": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true
 }
