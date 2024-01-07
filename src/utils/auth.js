@@ -1,11 +1,12 @@
 import { useAuthStore } from '../store/auth';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+// import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
+import apiInstance from './axios';
 
-export const Login = async (email, password) => {
+export const login = async (email, password) => {
     try {
-        const { data, status } = await axios.post('user/token', {
+        const { data, status } = await apiInstance.post('user/token/', {
             email,
             password,
         });
@@ -22,9 +23,9 @@ export const Login = async (email, password) => {
     }
 };
 
-export const Register = async (full_name, email, phone, password, confirm_password) => {
+export const register = async (full_name, email, phone, password, confirm_password) => {
     try {
-        const { data, status } = await axios.post('user/register', {
+        const { data, status } = await apiInstance.post('user/register', {
             full_name,
             email,
             password,
@@ -47,7 +48,7 @@ export const Register = async (full_name, email, phone, password, confirm_passwo
  * Remove The Token
  * Set the User Store to Null as not_logged_in
  */
-export const Logout = () => {
+export const logout = () => {
     Cookies.remove('access_Token');
     Cookies.remove('refresh_Token');
 
@@ -94,7 +95,7 @@ export const setAuthUser = (access_Token, refresh_Token) => {
     Cookies.set('access_Token', access_Token, { expires: 1, secure: true });
     Cookies.set('refresh_Token', refresh_Token, { expires: 7, secure: true });
 
-    const user = jwt_decode(access_Token) ?? null;
+    const user = jwtDecode(access_Token) ?? null;
 
     if (user) {
         useAuthStore.getState().setUser(user);
@@ -110,7 +111,7 @@ export const setAuthUser = (access_Token, refresh_Token) => {
 export const getRefreshToken = async () => {
     const refresh_Token = Cookies.get('refresh_Token');
 
-    const res = await axios.post('user/token/refresh', { refresh: refresh_Token });
+    const res = await apiInstance.post('user/token/refresh', { refresh: refresh_Token });
 
     return res.data;
 };
@@ -123,7 +124,7 @@ export const getRefreshToken = async () => {
  */
 export const isAccessTokenExpired = async (access_Token) => {
     try {
-        const decodedToken = jwt_decode(access_Token);
+        const decodedToken = jwtDecode(access_Token);
         return decodedToken.exp < Date.now() / 100;
     } catch (err) {
         console.log(err);
