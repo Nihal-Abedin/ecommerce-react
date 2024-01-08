@@ -13,13 +13,6 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPass, setConfirmPass] = useState('');
     const [isLoading, setIsLoading] = useState('');
-    const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
-    console.log(isLoggedIn);
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate('/', { replace: true });
-        }
-    }, []);
 
     const handleRegister = async (e) => {
         e.preventDefault();

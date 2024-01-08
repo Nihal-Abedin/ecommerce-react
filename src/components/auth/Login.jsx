@@ -8,13 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState('nihal@gmail.com');
     const [password, setPassword] = useState('testing1234');
     const [isLoading, setIsLoading] = useState('');
-    const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate('/', { replace: true });
-        }
-    }, []);
     console.log(email, password);
     const handleLogin = async (e) => {
         e.preventDefault();

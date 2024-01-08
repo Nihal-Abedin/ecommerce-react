@@ -3,8 +3,12 @@ import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
+    console.log(isLoggedIn);
+    if (!isLoggedIn) {
+        return <Navigate replace to={'/login'} />;
+    }
 
-    return isLoggedIn ? <>{children}</> : <Navigate to='/login' replace={true} />;
+    return children;
 };
 
 export default PrivateRoute;
