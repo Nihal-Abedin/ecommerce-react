@@ -83,7 +83,7 @@ export const setUser = async () => {
         return;
     }
 
-    if (isAccessTokenExpired(access_Token)) {
+    if (await isAccessTokenExpired(access_Token)) {
         const response = await getRefreshToken();
 
         setAuthUser(response.access, response.refresh);
@@ -134,7 +134,7 @@ export const getRefreshToken = async () => {
 export const isAccessTokenExpired = async (access_Token) => {
     try {
         const decodedToken = jwtDecode(access_Token);
-        return decodedToken.exp < Date.now() / 100;
+        return decodedToken.exp < parseInt(Date.now() / 1000, 10);
     } catch (err) {
         console.log(err);
         return true;

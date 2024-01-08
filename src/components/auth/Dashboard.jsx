@@ -6,7 +6,7 @@ const Dashboard = () => {
     const [isLoggedIn, user] = useAuthStore((state) => [state.isLoggedIn(), state.user()]);
 
     console.log(isLoggedIn, user);
-    return <>{isLoggedIn ? <p>Dashboard</p> : <p>HOME</p>}</>;
+    return <>{isLoggedIn ? <p>Hi {user.username}!</p> : <p>HOME</p>}</>;
 };
 
 export default Dashboard;
