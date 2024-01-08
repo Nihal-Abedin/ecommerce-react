@@ -6,7 +6,17 @@ const Dashboard = () => {
     const [isLoggedIn, user] = useAuthStore((state) => [state.isLoggedIn(), state.user()]);
 
     console.log(isLoggedIn, user);
-    return <>{isLoggedIn ? <p>Hi {user.username}!</p> : <p>HOME</p>}</>;
+    return (
+        <>
+            {isLoggedIn ? (
+                <div style={{ marginTop: '3rem' }} className=' px-3'>
+                    <p>Hi gg {user.username}!</p>
+                </div>
+            ) : (
+                <p>HOME</p>
+            )}
+        </>
+    );
 };
 
 export default Dashboard;

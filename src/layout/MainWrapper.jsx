@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { setUser } from '../utils/auth';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 
 const MainWrapper = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -19,10 +20,18 @@ const MainWrapper = ({ children }) => {
             {isLoading ? (
                 'Loading...'
             ) : (
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        height: '100vh',
+                    }}>
                     <Header />
-                    <Outlet />
-                    <p>Footer</p>
+                    <div className='mt-3 h-100'>
+                        <Outlet />
+                    </div>
+                    <Footer />
                 </div>
             )}{' '}
         </>

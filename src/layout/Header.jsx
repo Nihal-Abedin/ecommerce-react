@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../store/auth';
 
 const Header = () => {
+    const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
+
     return (
         <div>
-            <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+            <nav className='navbar navbar-expand-lg navbar-dark bg-dark position-fixed w-100'>
                 <div className='container'>
                     <Link className='navbar-brand' to='/'>
                         My Shop{' '}
@@ -139,16 +142,18 @@ const Header = () => {
                                 Search
                             </button>
                         </div>
-                        <Link className='btn btn-primary me-2' to='/login'>
-                            Login
-                        </Link>
-                        <Link className='btn btn-primary me-2' to='/register'>
-                            Register
-                        </Link>
-
+                        {!isLoggedIn ? (
+                            <Link className={`btn btn-primary me-2 ${isLoggedIn ? '' : 'hidden'}`} to='/login'>
+                                Login
+                            </Link>
+                        ) : null}
+                        {!isLoggedIn ? (
+                            <Link className={`btn btn-primary me-2 ${isLoggedIn ? '' : 'hidden'}`} to='/register'>
+                                Register
+                            </Link>
+                        ) : null}
                         {/* These are the button rendered based on users logged in status */}
                         {/* You could just un-comment it ;) */}
-
                         {/* {isLoggedIn()
                     ?
                     <>
@@ -162,9 +167,9 @@ const Header = () => {
 
                     </>
                 } */}
-                        {/* <Link className='btn btn-danger' to='/cart/'>
-                            <i className='fas fa-shopping-cart'></i> <span id='cart-total-items'>{cartCount || 0}</span>
-                        </Link> */}
+                        <Link className={`btn btn-danger ${isLoggedIn ? '' : 'hidden'}`} to='/cart/'>
+                            <i className='fas fa-shopping-cart'></i> <span id='cart-total-items'>{0}</span>
+                        </Link>
                     </div>
                 </div>
             </nav>

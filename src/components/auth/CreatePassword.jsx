@@ -48,7 +48,7 @@ const CreatePassword = () => {
                                                 id='pills-login'
                                                 role='tabpanel'
                                                 aria-labelledby='tab-login'>
-                                                <form>
+                                                <form onSubmit={handleSetNewPass}>
                                                     {/* Email input */}
                                                     <div className='form-outline mb-4'>
                                                         <label className='form-label' htmlFor='Full Name'>
