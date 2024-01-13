@@ -2,25 +2,30 @@ import { useState, useEffect } from 'react';
 import { login } from '../../utils/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/auth';
+import { useLogin } from '../../queryHooks/auth/useAuth';
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('nihal@gmail.com');
     const [password, setPassword] = useState('testing1234');
-    const [isLoading, setIsLoading] = useState('');
 
-    console.log(email, password);
+    const { mutate, isPending } = useLogin();
+
     const handleLogin = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
 
-        const { error } = await login(email, password);
-
-        if (error) {
-            alert(error);
-        } else {
-            navigate('/', { replace: true });
-        }
+        mutate(
+            { email, password },
+            {
+                onSuccess: () => {
+                    navigate('/', { replace: true });
+                },
+                onError: (err) => {
+                    console.log(err, 'ASDSA');
+                    alert(err.error);
+                },
+            }
+        );
     };
     return (
         <section>
@@ -71,7 +76,10 @@ const Login = () => {
                                                         />
                                                     </div>
 
-                                                    <button className='btn btn-primary w-100' type='submit'>
+                                                    <button
+                                                        disabled={isPending}
+                                                        className='btn btn-primary w-100'
+                                                        type='submit'>
                                                         <span className='mr-2'>Sign In </span>
                                                         <i className='fas fa-sign-in-alt' />
                                                     </button>

@@ -3,12 +3,9 @@ import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import apiInstance from './axios';
 
-export const login = async (email, password) => {
+export const login = async (loginPayload) => {
     try {
-        const { data, status } = await apiInstance.post('user/token/', {
-            email,
-            password,
-        });
+        const { data, status } = await apiInstance.post('user/token/', loginPayload);
         console.log(data);
         if (status === 200) {
             const loginuser = jwtDecode(data.access);
@@ -24,32 +21,31 @@ export const login = async (email, password) => {
             setAuthUser(data.access, data.refresh);
 
             // ALERT LOGGED IN SUCCESS
+        } else {
+            throw data;
         }
 
         return { data, error: null };
     } catch (err) {
-        return { data: null, error: err.response.data?.details || 'Something went wrong!' };
+        throw { data: null, error: err.response.data?.detail || 'Something went wrong!' };
     }
 };
 
-export const register = async (full_name, email, phone, password, confirm_password) => {
+export const register = async (registerPayload) => {
     try {
-        const { data, status } = await apiInstance.post('user/register/', {
-            full_name,
-            email,
-            password,
-            confirm_password,
-            phone,
-        });
+        const { data, status } = await apiInstance.post('user/register/', registerPayload);
 
         if (status === 201) {
-            await login(email, password);
+            await login({ email: registerPayload.email, password: registerPayload.password });
             // ALERT SIGNED UP SUCCESS
+        } else {
+            throw data;
         }
 
         return { data, error: null };
     } catch (err) {
-        return { data: null, error: err.response.data?.details || 'Something went wrong!' };
+        console.log(err);
+        throw { data: null, error: err.response.data || 'Something went wrong!' };
     }
 };
 

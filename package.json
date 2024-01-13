@@ -11,6 +11,8 @@
         "format": "npx prettier --write ."
     },
     "dependencies": {
+        "@tanstack/react-query": "^5.17.10",
+        "@tanstack/react-query-devtools": "^5.17.10",
         "axios": "^1.6.5",
         "chart.js": "^4.4.1",
         "dayjs": "^1.11.10",
@@ -28,6 +30,7 @@
         "zustand": "^4.4.7"
     },
     "devDependencies": {
+        "@tanstack/eslint-plugin-query": "^5.17.7",
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
         "@vitejs/plugin-react": "^4.2.1",

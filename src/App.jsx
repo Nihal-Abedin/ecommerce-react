@@ -7,26 +7,32 @@ import CreatePassword from './components/auth/CreatePassword';
 import MainWrapper from './layout/MainWrapper';
 import PrivateRoute from './layout/PrivateRoute';
 import PrivateRoutesOnLoggedIn from './layout/PrivateRoutesOnLoggedIn';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+const queryClient = new QueryClient();
 const App = () => {
     return (
         <BrowserRouter>
-            <Routes>
-                <Route element={<PrivateRoutesOnLoggedIn />}>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/reset-password' element={<ResetPassword />} />
-                    <Route path='/create-password' element={<CreatePassword />} />
-                </Route>
-                <Route
-                    element={
-                        <PrivateRoute>
-                            <MainWrapper />
-                        </PrivateRoute>
-                    }>
-                    <Route path='/' element={<Dashboard />} />
-                </Route>
-            </Routes>
+            <QueryClientProvider client={queryClient}>
+                <ReactQueryDevtools initialIsOpen={false} />
+                <Routes>
+                    <Route element={<PrivateRoutesOnLoggedIn />}>
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/reset-password' element={<ResetPassword />} />
+                        <Route path='/create-password' element={<CreatePassword />} />
+                    </Route>
+                    <Route
+                        element={
+                            <PrivateRoute>
+                                <MainWrapper />
+                            </PrivateRoute>
+                        }>
+                        <Route path='/' element={<Dashboard />} />
+                    </Route>
+                </Routes>
+            </QueryClientProvider>
         </BrowserRouter>
     );
 };

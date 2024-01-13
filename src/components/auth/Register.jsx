@@ -3,29 +3,32 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthStore } from '../../store/auth';
 import { register } from '../../utils/auth';
+import { useRegisTration } from '../../queryHooks/auth/useAuth';
 
 const Register = () => {
     const navigate = useNavigate();
 
-    const [fullName, setFullName] = useState('');
+    const [full_name, setFull_name] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
-    const [isLoading, setIsLoading] = useState('');
-
+    const [confirm_password, setConfirm_password] = useState('');
+    const { mutate, isPending } = useRegisTration();
     const handleRegister = async (e) => {
         e.preventDefault();
-
-        setIsLoading(true);
-
-        const { error } = await register(fullName, email, phone, password, confirmPass);
-
-        if (error) {
-            alert(error);
-        } else {
-            navigate('/', { replace: true });
-        }
+        mutate(
+            { full_name, email, phone, password, confirm_password },
+            {
+                onSuccess: () => {
+                    console.log('Success');
+                    navigate('/', { replace: true });
+                },
+                onError: (err) => {
+                    console.log(err);
+                    alert(err.error);
+                },
+            }
+        );
     };
     return (
         <main className='' style={{ marginBottom: 100, marginTop: 50 }}>
@@ -45,7 +48,7 @@ const Register = () => {
                                             id='pills-login'
                                             role='tabpanel'
                                             aria-labelledby='tab-login'>
-                                            <form>
+                                            <form onSubmit={handleRegister}>
                                                 <div className='form-outline mb-4'>
                                                     <label className='form-label' htmlFor='Full Name'>
                                                         Full Name
@@ -56,7 +59,7 @@ const Register = () => {
                                                         placeholder='Full Name'
                                                         required
                                                         className='form-control'
-                                                        onChange={(e) => setFullName(e.currentTarget.value)}
+                                                        onChange={(e) => setFull_name(e.currentTarget.value)}
                                                     />
                                                 </div>
                                                 <div className='form-outline mb-4'>
@@ -109,7 +112,7 @@ const Register = () => {
                                                         placeholder='Confirm Password'
                                                         required
                                                         className='form-control'
-                                                        onChange={(e) => setConfirmPass(e.currentTarget.value)}
+                                                        onChange={(e) => setConfirm_password(e.currentTarget.value)}
                                                     />
                                                 </div>
                                                 {/* Password Check */}
@@ -120,7 +123,7 @@ const Register = () => {
                                                 <button
                                                     className='btn btn-primary w-100'
                                                     type='submit'
-                                                    disabled={'isLoading'}>
+                                                    disabled={isPending}>
                                                     <span className='mr-2'>Sign Up</span>
                                                     <i className='fas fa-user-plus' />
                                                 </button>
