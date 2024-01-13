@@ -25,10 +25,10 @@ const MainWrapper = ({ children }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        height: '100vh',
+                        minHeight: '100vh',
                     }}>
                     <Header />
-                    <div className='mt-3 h-100'>
+                    <div style={{ marginTop: '4.5rem' }} className=' px-3 h-100 '>
                         <Outlet />
                     </div>
                     <Footer />

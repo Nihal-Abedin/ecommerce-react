@@ -9,7 +9,7 @@ const Dashboard = () => {
     return (
         <>
             {isLoggedIn ? (
-                <div style={{ marginTop: '3rem' }} className=' px-3'>
+                <div>
                     <p>Hi gg {user.username}!</p>
                 </div>
             ) : (

@@ -9,8 +9,16 @@ import PrivateRoute from './layout/PrivateRoute';
 import PrivateRoutesOnLoggedIn from './layout/PrivateRoutesOnLoggedIn';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Products from './components/products/Products';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: false,
+            refetchOnWindowFocus: true,
+        },
+    },
+});
 const App = () => {
     return (
         <BrowserRouter>
@@ -29,7 +37,8 @@ const App = () => {
                                 <MainWrapper />
                             </PrivateRoute>
                         }>
-                        <Route path='/' element={<Dashboard />} />
+                        <Route path='/dashboard' element={<Dashboard />} />
+                        <Route path='/' element={<Products />} />
                     </Route>
                 </Routes>
             </QueryClientProvider>
