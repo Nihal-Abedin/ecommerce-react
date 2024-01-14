@@ -81,7 +81,10 @@ export const setUser = async () => {
 
     if (await isAccessTokenExpired(access_Token)) {
         const response = await getRefreshToken();
-
+        if(response.error) {
+            logout()
+            return
+        }
         setAuthUser(response.access, response.refresh);
     } else {
         setAuthUser(access_Token, refresh_Token);
@@ -91,7 +94,7 @@ export const setUser = async () => {
 /***
  * @param access_Token Access TOken
  * @param refresh_Token Refresh Token
- * Setting Up The Tokens
+ * Setting Up The getRefreshTokenTokens
  * DECODE the access_Token for user INFOS
  * SET User Store with the decoded Value
  * SET loadind Store with the false
@@ -116,9 +119,17 @@ export const setAuthUser = (access_Token, refresh_Token) => {
 export const getRefreshToken = async () => {
     const refresh_Token = Cookies.get('refresh_Token');
 
-    const res = await apiInstance.post('user/token/refresh', { refresh: refresh_Token });
-
-    return res.data;
+    try{
+        const {data,status} = await apiInstance.post('user/token/refresh', { refresh: refresh_Token });
+        console.log(status)
+        if(status === 401) {
+            throw {error:data?.response.data?.detail}
+        }
+    
+        return data;
+    } catch(err){
+        return {error:err?.response.data?.detail}
+    }
 };
 
 /**

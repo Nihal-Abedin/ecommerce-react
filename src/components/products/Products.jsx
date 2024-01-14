@@ -21,10 +21,7 @@ const Products = () => {
                                 {data.data.map((p) => (
                                     <div className='card'>
                                         <div className='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
-                                            <img
-                                                src='https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/belt.jpg'
-                                                className='w-100'
-                                            />
+                                            <img src={p.image} className='w-100' />
                                             <a href='#!'>
                                                 <div className='mask'>
                                                     <div className='d-flex justify-content-start align-items-end h-100'>
