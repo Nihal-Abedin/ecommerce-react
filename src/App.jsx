@@ -10,7 +10,7 @@ import PrivateRoutesOnLoggedIn from './layout/PrivateRoutesOnLoggedIn';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Products from './components/products/Products';
-
+import "./App.css";
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {

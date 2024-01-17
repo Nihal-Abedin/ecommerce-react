@@ -5,27 +5,17 @@ const Header = () => {
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
 
     return (
-        <div>
-            <nav className='navbar navbar-expand-lg navbar-dark bg-dark position-fixed w-100'>
-                <div className='container'>
-                    <Link className='navbar-brand' to='/'>
+        <div >
+            <nav >
+                <div className='flex bg-red-500'>
+                    <Link className='' to='/'>
                         My Shop{' '}
                     </Link>
-                    <button
-                        className='navbar-toggler'
-                        type='button'
-                        data-bs-toggle='collapse'
-                        data-bs-target='#navbarSupportedContent'
-                        aria-controls='navbarSupportedContent'
-                        aria-expanded='false'
-                        aria-label='Toggle navigation'>
-                        <span className='navbar-toggler-icon' />
-                    </button>
-                    <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-                        <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-                            <li className='nav-item dropdown'>
+                    <div className='flex bg-red-500' id='navbarSupportedContent'>
+                        <ul className=''>
+                            <li className=''>
                                 <a
-                                    className='nav-link dropdown-toggle'
+                                    className=''
                                     href='#'
                                     id='navbarDropdown'
                                     role='button'
@@ -33,38 +23,38 @@ const Header = () => {
                                     aria-expanded='false'>
                                     Account
                                 </a>
-                                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <ul className='' aria-labelledby='navbarDropdown'>
                                     <li>
-                                        <Link to={'/customer/account/'} className='dropdown-item'>
+                                        <Link to={'/customer/account/'} className=''>
                                             <i className='fas fa-user'></i> Account
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to={`/customer/orders/`}>
+                                        <Link className='' to={`/customer/orders/`}>
                                             <i className='fas fa-shopping-cart'></i> Orders
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to={`/customer/wishlist/`}>
+                                        <Link className='' to={`/customer/wishlist/`}>
                                             <i className='fas fa-heart'></i> Wishlist
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to={`/customer/notifications/`}>
+                                        <Link className='' to={`/customer/notifications/`}>
                                             <i className='fas fa-bell fa-shake'></i> Notifications
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to={`/customer/settings/`}>
+                                        <Link className='' to={`/customer/settings/`}>
                                             <i className='fas fa-gear fa-spin'></i> Settings
                                         </Link>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li className='nav-item dropdown'>
+                            <li className=''>
                                 <a
-                                    className='nav-link dropdown-toggle'
+                                    className=''
                                     href='#'
                                     id='navbarDropdown'
                                     role='button'
@@ -72,57 +62,57 @@ const Header = () => {
                                     aria-expanded='false'>
                                     Vendor
                                 </a>
-                                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <ul className='' aria-labelledby='navbarDropdown'>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/dashboard/'>
+                                        <Link className='' to='/vendor/dashboard/'>
                                             {' '}
                                             <i className='fas fa-user'></i> Dashboard
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/products/'>
+                                        <Link className='' to='/vendor/products/'>
                                             {' '}
                                             <i className='bi bi-grid-fill'></i> Products
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/product/new/'>
+                                        <Link className='' to='/vendor/product/new/'>
                                             {' '}
                                             <i className='fas fa-plus-circle'></i> Add Products
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/orders/'>
+                                        <Link className='' to='/vendor/orders/'>
                                             {' '}
                                             <i className='fas fa-shopping-cart'></i> Orders
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/earning/'>
+                                        <Link className='' to='/vendor/earning/'>
                                             {' '}
                                             <i className='fas fa-dollar-sign'></i> Earning
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/reviews/'>
+                                        <Link className='' to='/vendor/reviews/'>
                                             {' '}
                                             <i className='fas fa-star'></i> Reviews
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/coupon/'>
+                                        <Link className='' to='/vendor/coupon/'>
                                             {' '}
                                             <i className='fas fa-tag'></i> Coupon
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/notifications/'>
+                                        <Link className='' to='/vendor/notifications/'>
                                             {' '}
                                             <i className='fas fa-bell fa-shake'></i> Notifications
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className='dropdown-item' to='/vendor/settings/'>
+                                        <Link className='' to='/vendor/settings/'>
                                             {' '}
                                             <i className='fas fa-gear fa-spin'></i> Settings
                                         </Link>
@@ -130,25 +120,25 @@ const Header = () => {
                                 </ul>
                             </li>
                         </ul>
-                        <div className='d-flex'>
+                        <div className=''>
                             <input
                                 name='search'
-                                className='form-control me-2'
+                                className=''
                                 type='text'
                                 placeholder='Search'
                                 aria-label='Search'
                             />
-                            <button className='btn btn-outline-success me-2' type='submit'>
+                            <button className='' type='submit'>
                                 Search
                             </button>
                         </div>
                         {!isLoggedIn ? (
-                            <Link className={`btn btn-primary me-2 ${isLoggedIn ? '' : 'hidden'}`} to='/login'>
+                            <Link className={` ${isLoggedIn ? '' : 'hidden'}`} to='/login'>
                                 Login
                             </Link>
                         ) : null}
                         {!isLoggedIn ? (
-                            <Link className={`btn btn-primary me-2 ${isLoggedIn ? '' : 'hidden'}`} to='/register'>
+                            <Link className={` ${isLoggedIn ? '' : 'hidden'}`} to='/register'>
                                 Register
                             </Link>
                         ) : null}
@@ -167,7 +157,7 @@ const Header = () => {
 
                     </>
                 } */}
-                        <Link className={`btn btn-danger ${isLoggedIn ? '' : 'hidden'}`} to='/cart/'>
+                        <Link className={`${isLoggedIn ? '' : 'hidden'}`} to='/cart/'>
                             <i className='fas fa-shopping-cart'></i> <span id='cart-total-items'>{0}</span>
                         </Link>
                     </div>

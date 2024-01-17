@@ -6,6 +6,7 @@ module.exports = {
         'plugin:eslint-plugin-prettier',
         'plugin:eslint-plugin-auto-import',
         'plugin:react-hooks/recommended',
+        'plugin:@typescript-eslint/recommended',
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parser: '@typescript-eslint/parser',
