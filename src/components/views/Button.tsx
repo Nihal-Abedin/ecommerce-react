@@ -17,7 +17,7 @@ type PROPS = ButtonElementType[Element] & {
     isLoading?: boolean;
 };
 
-const Button: React.FC<PROPS> = ({ element, className = '', children, varient = 'primary', ...restProps }) => {
+const Button: React.FC<PROPS> = ({ element= "button", className = '', children, varient = 'primary', ...restProps }) => {
     return createElement(
         element,
         { className: twMerge(`${styles[varient]} ${styles.button} `, className), ...restProps },
