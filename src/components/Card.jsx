@@ -2,14 +2,22 @@ import { IoMdAdd, IoMdClose } from 'react-icons/io';
 import Button from '../components/views/Button';
 import Dropdown from '../components/views/Dropdown';
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const sizeOptions = [
+    {
+        label: 'Xl',
+    },
+    {
+        label: 'Xl',
+    },
     {
         label: 'Xl',
     },
 ];
 const Card = ({ product }) => {
     const [showCartOptions, setshowOptions] = useState(false);
+    const navigate = useNavigate();
     return (
         <div className='relative w-[22rem] h-[25rem] overflow-hidden rounded drop-shadow-md'>
             <main className='h-[60%]'>
@@ -38,13 +46,23 @@ const Card = ({ product }) => {
                     className='absolute top-2 right-2 text-2xl text-white cursor-pointer'
                     onClick={() => setshowOptions((prev) => !prev)}
                 />
-                <div className='w-16 flex gap-4  z-[5]'>
-                    <Dropdown title='Size' options={sizeOptions} className='drop-shadow-md' />
-                    <Dropdown title='Color' options={sizeOptions} className='drop-shadow-md ' />
-                </div>
+                {showCartOptions ? (
+                    <div className='w-16 flex gap-4  z-[5]'>
+                        <Dropdown
+                            title='Size'
+                            options={sizeOptions}
+                            className='drop-shadow-md bg-black bg-opacity-65 text-white border border-white'
+                        />
+                        <Dropdown
+                            title='Color'
+                            options={sizeOptions}
+                            className='drop-shadow-md  bg-black bg-opacity-65 text-white border border-white'
+                        />
+                    </div>
+                ) : null}
                 <Button
                     element='button'
-                    varient='ghost'
+                    varient='primary'
                     type='submit'
                     className='w-[70%]  bottom-16 absolute ml-9 z-[4]'>
                     Add to Cart
