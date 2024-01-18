@@ -1,0 +1,10 @@
+.footer {
+    /* width: 100vw; */
+    background-image: url('../assets/images/footer.png');
+    height: 27rem;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

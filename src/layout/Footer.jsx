@@ -1,153 +1,103 @@
+import styles from './footer.module.css';
+import { FaFacebookSquare, FaLinkedin } from 'react-icons/fa';
+
 const Footer = () => {
     return (
-        <footer className='bg-light text-center text-lg-start' style={{ marginTop: 200 }}>
-            {/* Grid container */}
-            <div className='container p-4'>
-                <div className='row'>
-                    <div className='col-md-6 mb-4 mb-md-0 d-flex justify-content-center justify-content-md-start align-items-center'>
-                        <strong>Get connected with me on social networks</strong>
-                    </div>
-                    <div className='col-md-6 d-flex justify-content-center justify-content-md-end'>
-                        {/* Facebook */}
-                        <a
-                            className='btn btn-primary btn-sm btn-floating me-2'
-                            style={{ backgroundColor: '#3b5998' }}
-                            href='#!'
-                            role='button'>
-                            <i className='fab fa-facebook-f' />
-                        </a>
-                        {/* Twitter */}
-                        <a
-                            className='btn text-white btn-sm btn-floating me-2'
-                            style={{ backgroundColor: '#55acee' }}
-                            href='#!'
-                            role='button'>
-                            <i className='fab fa-twitter' />
-                        </a>
-                        {/* Pinterest */}
-                        <a
-                            className='btn text-white btn-sm btn-floating me-2'
-                            style={{ backgroundColor: '#c61118' }}
-                            href='#!'
-                            role='button'>
-                            <i className='fab fa-pinterest' />
-                        </a>
-                        {/* Youtube */}
-                        <a
-                            className='btn text-white btn-sm btn-floating me-2'
-                            style={{ backgroundColor: '#ed302f' }}
-                            href='#!'
-                            role='button'>
-                            <i className='fab fa-youtube' />
-                        </a>
-                        {/* Instagram */}
-                        <a
-                            className='btn text-white btn-sm btn-floating me-2'
-                            style={{ backgroundColor: '#ac2bac' }}
-                            href='#!'
-                            role='button'>
-                            <i className='fab fa-instagram' />
-                        </a>
-                    </div>
-                </div>
-                <hr className='my-3' />
-                <div className='row'>
-                    <div className='col-lg-4 mb-4 mb-lg-0'>
-                        <p>
-                            <strong>About me</strong>
-                        </p>
-                        <p>The Great One!</p>
-                    </div>
-                    <div className='col-lg-3 mb-4 mb-lg-0'>
-                        <p>
-                            <strong>Useful links</strong>
-                        </p>
-                        <ul className='list-unstyled mb-0'>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Privacy policy
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Media
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Job offers
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Cooperation
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className='col-lg-3 mb-4 mb-lg-0'>
-                        <p>
-                            <strong>Products</strong>
-                        </p>
-                        <ul className='list-unstyled'>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Electronics
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Fashion
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Beauty
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Automotive
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className='col-lg-2 mb-4 mb-lg-0'>
-                        <p>
-                            <strong>Support</strong>
-                        </p>
-                        <ul className='list-unstyled'>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Complaints
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Help center
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    Community
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#!' className='text-dark'>
-                                    FAQ
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+        <footer
+            className={`${styles.footer} text-white p-20 grid grid-cols-[2fr,1fr,1fr,1fr]`}
+            style={{ marginTop: 200 }}>
+            {/* <div className='text-center p-3 z-2' style={{ backgroundColor: 'rgba(0, 0, 0)' }}>
                 © 2024 - Date Copyright:
                 <a className='text-dark' target='_parent' href='https://www.linkedin.com/in/nihal-abedin-a65674208/'>
                     Nihal
                 </a>
+            </div> */}
+            <div className=' flex flex-col gap-3 justify-between'>
+                <h1 className='text-2xl'>Hi,</h1>
+                <div className=' flex flex-col gap-4'>
+                    <h1>Phone: (+880) 0123456789</h1>
+                    <h1>Email: hello@company_name.com</h1>
+                </div>
+                <div className='flex text-5xl gap-4'>
+                    <FaFacebookSquare />
+                    <FaLinkedin />
+                </div>
             </div>
-            {/* Copyright */}
+            <div className=' flex flex-col gap-y-11'>
+                <h1 className='text-2xl'> All Products</h1>
+                <ul className=' flex flex-col gap-4'>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Electronics
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Fashion
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Beauty
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Automotive
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div className=' flex flex-col gap-y-11'>
+                <h1 className='text-2xl'>Support</h1>
+                <ul className=' flex flex-col gap-4'>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Complaints
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Help center
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Community
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            FAQ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div className=' flex flex-col gap-y-11'>
+                <h1 className='text-2xl'>About</h1>
+                <ul className=' flex flex-col gap-4'>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Privacy policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Media
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Job offers
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#!' className='text-dark'>
+                            Cooperation
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </footer>
     );
 };
