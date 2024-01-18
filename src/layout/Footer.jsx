@@ -6,12 +6,6 @@ const Footer = () => {
         <footer
             className={`${styles.footer} text-white p-20 grid grid-cols-[2fr,1fr,1fr,1fr]`}
             style={{ marginTop: 200 }}>
-            {/* <div className='text-center p-3 z-2' style={{ backgroundColor: 'rgba(0, 0, 0)' }}>
-                © 2024 - Date Copyright:
-                <a className='text-dark' target='_parent' href='https://www.linkedin.com/in/nihal-abedin-a65674208/'>
-                    Nihal
-                </a>
-            </div> */}
             <div className=' flex flex-col gap-3 justify-between'>
                 <h1 className='text-2xl'>Hi,</h1>
                 <div className=' flex flex-col gap-4'>

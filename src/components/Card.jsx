@@ -1,93 +1,54 @@
+import { IoMdAdd, IoMdClose } from 'react-icons/io';
+import Button from '../components/views/Button';
+import Dropdown from '../components/views/Dropdown';
+import { useState } from 'react';
+
+const sizeOptions = [
+    {
+        label: 'Xl',
+    },
+];
 const Card = ({ product }) => {
+    const [showCartOptions, setshowOptions] = useState(false);
     return (
-        <div className='card'>
-            <div className='bg-image hover-zoom ripple' data-mdb-ripple-color='light'>
-                <img src={product.image} className='w-100' />
-                <a href='#!'>
-                    <div className='mask'>
-                        <div className='d-flex justify-content-start align-items-end h-100'>
-                            <h5>
-                                <span className='badge badge-primary ms-2'>New</span>
-                            </h5>
-                        </div>
+        <div className='relative w-[22rem] h-[25rem] overflow-hidden rounded drop-shadow-md'>
+            <main className='h-[60%]'>
+                <img src={product.image} className='h-full w-full object-cover' />
+            </main>
+            <section className='-text--color-grey-900 -bg--color-grey-200 h-[40%] text-left p-3 flex flex-col'>
+                <h1 className='text-2xl font-semibold'>{product.title}</h1>
+                <p className='text-gray-600'>{product.category.title}</p>
+                <p className='text-gray-600'>{product.description}</p>
+                <div className='flex items-center justify-between mt-7'>
+                    <div className='flex items-center gap-4'>
+                        <p>${product.price}</p>
+                        <p className='line-through	text-gray-500'>${product.old_price}</p>
                     </div>
-                    <div className='hover-overlay'>
-                        <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }} />
-                    </div>
-                </a>
-            </div>
-            <div className='card-body'>
-                <a href='' className='text-reset'>
-                    <h5 className='card-title mb-3'>{product.title}</h5>
-                </a>
-                <a href='' className='text-reset'>
-                    <p>{product.category.title}</p>
-                </a>
-                <div className='d-flex justify-content-center gap-2'>
-                    <h6 className='mb-3'>${product.price}</h6>
-                    <h6 className='mb-3 text-muted'>
-                        <strike>${product.old_price}</strike>
-                    </h6>
+                    <Button className='text-2xl p-0' onClick={() => setshowOptions((prev) => !prev)}>
+                        <IoMdAdd />
+                    </Button>
                 </div>
-                <div className='btn-group'>
-                    <button
-                        className='btn btn-primary dropdown-toggle'
-                        type='button'
-                        id='dropdownMenuClickable'
-                        data-bs-toggle='dropdown'
-                        data-bs-auto-close='false'
-                        aria-expanded='false'>
-                        Variation
-                    </button>
-                    <ul className='dropdown-menu' aria-labelledby='dropdownMenuClickable'>
-                        <div className='d-flex flex-column'>
-                            <li className='p-1'>
-                                <b>Size</b>: XL
-                            </li>
-                            <div className='p-1 mt-0 pt-0 d-flex flex-wrap'>
-                                <li>
-                                    <button className='btn btn-secondary btn-sm me-2 mb-1'>XXL</button>
-                                </li>
-                                <li>
-                                    <button className='btn btn-secondary btn-sm me-2 mb-1'>XXL</button>
-                                </li>
-                                <li>
-                                    <button className='btn btn-secondary btn-sm me-2 mb-1'>XXL</button>
-                                </li>
-                            </div>
-                        </div>
-                        <div className='d-flex flex-column mt-3'>
-                            <li className='p-1'>
-                                <b>COlor</b>: Red
-                            </li>
-                            <div className='p-1 mt-0 pt-0 d-flex flex-wrap'>
-                                <li>
-                                    <button className='btn btn-sm me-2 mb-1 p-3' style={{ backgroundColor: 'red' }} />
-                                </li>
-                                <li>
-                                    <button className='btn btn-sm me-2 mb-1 p-3' style={{ backgroundColor: 'green' }} />
-                                </li>
-                                <li>
-                                    <button
-                                        className='btn btn-sm me-2 mb-1 p-3'
-                                        style={{ backgroundColor: 'yellow' }}
-                                    />
-                                </li>
-                            </div>
-                        </div>
-                        <div className='d-flex mt-3 p-1'>
-                            <button type='button' className='btn btn-primary me-1 mb-1'>
-                                <i className='fas fa-shopping-cart' />
-                            </button>
-                            <button type='button' className='btn btn-danger px-3 me-1 mb-1 ms-2'>
-                                <i className='fas fa-heart' />
-                            </button>
-                        </div>
-                    </ul>
-                    <button type='button' className='btn btn-danger px-3 me-1 ms-2'>
-                        <i className='fas fa-heart' />
-                    </button>
+            </section>
+
+            <div
+                className={`overlay absolute transition-all ${
+                    showCartOptions ? '-translate-y-0' : '-translate-y-full'
+                } top-0 -bg--color-grey-900 bg-opacity-75 w-full h-full flex items-center pl-5`}>
+                <IoMdClose
+                    className='absolute top-2 right-2 text-2xl text-white cursor-pointer'
+                    onClick={() => setshowOptions((prev) => !prev)}
+                />
+                <div className='w-16 flex gap-4  z-[5]'>
+                    <Dropdown title='Size' options={sizeOptions} className='drop-shadow-md' />
+                    <Dropdown title='Color' options={sizeOptions} className='drop-shadow-md ' />
                 </div>
+                <Button
+                    element='button'
+                    varient='ghost'
+                    type='submit'
+                    className='w-[70%]  bottom-16 absolute ml-9 z-[4]'>
+                    Add to Cart
+                </Button>
             </div>
         </div>
     );
