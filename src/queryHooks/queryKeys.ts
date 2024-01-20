@@ -4,3 +4,7 @@ export const PRODUCT_KEYS = {
     // list:()
 }
 
+export const CATEGORIES_KEYS = {
+    all: ['categories'] as const,
+    lists: () => [...CATEGORIES_KEYS.all, 'categories_lists'] as const
+}

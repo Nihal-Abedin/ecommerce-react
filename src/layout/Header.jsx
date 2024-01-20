@@ -28,7 +28,7 @@ const Header = () => {
     ];
 
     return (
-        <div className='w-full fixed flex items-center py-2 px-4 bg-[#F7F8FA]'>
+        <div className='w-full fixed flex items-center py-2 px-4 bg-[#F7F8FA] z-10'>
             <Link className='w-36 font-medium' to='/'>
                 My Shop
             </Link>

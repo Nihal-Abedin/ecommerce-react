@@ -1,5 +1,6 @@
 import { useProducts } from '../../queryHooks/queries/products';
 import Card from '../Card';
+import Categories from '../categories/Categories';
 
 const Products = () => {
     const { data, isLoading, isError, error } = useProducts();
@@ -13,27 +14,23 @@ const Products = () => {
         return <p>Loading...</p>;
     }
     return (
-        <div>
-            <main>
-                <div className='container'>
-                    <section className='text-center'>
-                        <div className='row'>
-                            <div className='col-lg-4 col-md-12 mb-4'>
-                                {data.data.map((p) => (
-                                    <Card key={p.id} product={p} />
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-                    <div className="row">
-                        <div className="col-lg-2">
-                            <div className='w-4 h-4 rounded-circle bg-red'>cat</div>
+        <main>
+            <div>
+                <section className='text-center'>
+                    <div className='row'>
+                        <div className='col-lg-4 col-md-12 mb-4'>
+                            {data.data.map((p) => (
+                                <Card key={p.id} product={p} />
+                            ))}
                         </div>
                     </div>
-                    {/*Section: Wishlist*/}
+                </section>
+                <div>
+                    <Categories />
                 </div>
-            </main>
-        </div>
+                {/*Section: Wishlist*/}
+            </div>
+        </main>
     );
 };
 
