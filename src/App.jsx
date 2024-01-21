@@ -10,6 +10,7 @@ import PrivateRoutesOnLoggedIn from './layout/PrivateRoutesOnLoggedIn';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Products from './components/products/Products';
+import ProductDetails from './components/productDetails/ProductDetails';
 import "./App.css";
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -38,6 +39,7 @@ const App = () => {
                         }>
                         <Route path='/dashboard' element={<Dashboard />} />
                         <Route path='/' element={<Products />} />
+                        <Route path='/detail/:slug' element={<ProductDetails />} />
                     </Route>
                 </Routes>
             </QueryClientProvider>

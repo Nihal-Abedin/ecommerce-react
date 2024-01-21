@@ -21,10 +21,10 @@ const Card = ({ product }) => {
     return (
         <div className='relative w-[22rem] h-[25rem] overflow-hidden rounded drop-shadow-md'>
             <main className='h-[60%]'>
-                <img src={product.image} className='h-full w-full object-cover' />
+               <Link to={`/detail/${product.slug}`}> <img src={product.image} className='h-full w-full object-cover' /></Link>
             </main>
             <section className='-text--color-grey-900 -bg--color-grey-200 h-[40%] text-left p-3 flex flex-col'>
-                <h1 className='text-2xl font-semibold'>{product.title}</h1>
+                <Link to={`/detail/${product.slug}`} className='text-2xl font-semibold'>{product.title}</Link>
                 <p className='text-gray-600'>{product.category.title}</p>
                 <p className='text-gray-600'>{product.description}</p>
                 <div className='flex items-center justify-between mt-7'>

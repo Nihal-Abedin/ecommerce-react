@@ -27,7 +27,7 @@ const Input = ({
             </div>
             {search ? (
                 <Button element='button' className='py-2 px-4 -bg--color-grey-200 rounded-none'>
-                    <i class='fas fa-search'/>
+                    <i className='fas fa-search'/>
                 </Button>
             ) : null}
         </div>
