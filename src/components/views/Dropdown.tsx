@@ -3,6 +3,7 @@ import { IconType } from 'react-icons';
 import Button from './Button';
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import ClickOutside from '../helpers/ClickOutside';
 
 export type SelectProps = {
     title: string;
@@ -10,33 +11,36 @@ export type SelectProps = {
     children?: React.ReactNode;
     className?: string;
 };
-
 const Dropdown: React.FC<SelectProps> = ({ title, options, className = '' }) => {
     const [showOptions, setShowOptions] = useState<boolean>(false);
-
     return (
-        //  relative -bg--color-grey-200 rounded-md min-w-36
-        <div className={twMerge('relative -bg--color-grey-200 rounded-md min-w-36', className)}>
+        
+        <div className={twMerge('relative -bg--color-grey-200 rounded-md min-w-36 ', className)}>
+            <ClickOutside onClick={()=>setShowOptions(false)}>
             <Button
                 onClick={() => setShowOptions((prev) => !prev)}
                 element='button'
-                className='w-full flex items-center justify-between gap-2 '>
+                varient='primary'
+                className='w-full flex items-center justify-between gap-2'>
                 {title} <SlArrowDown className={` transition-all ${showOptions ? 'rotate-180' : ''}`} />
             </Button>
             <div
                 className={twMerge(
-                    `max-h-36 overflow-y-auto  rounded-md absolute -bg--color-grey-100 w-full divide-y-2 ${
-                        showOptions ? 'block' : 'hidden'
+                    `max-h-36 overflow-y-auto  rounded-md absolute -bg--color-grey-100 w-full divide-y-2 transition-all ${
+                        showOptions ? 'opacity-100 visible translate-y-100 ' : 'opacity-0 invisible -translate-y-1'
                     }`,
                     className
-                )}>
+                    )}>
                 {options.map((op) => (
-                    <p className='p-3 flex items-center gap-3 '>
+                    <p
+                    key={op.label}
+                    className='p-3 flex items-center gap-3 cursor-pointer hover:-bg--color-grey-200 transition-colors'>
                         {op.icon ? <op.icon /> : null}
                         {op.label}
                     </p>
                 ))}
             </div>
+                </ClickOutside>
         </div>
     );
 };

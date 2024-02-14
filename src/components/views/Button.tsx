@@ -18,6 +18,7 @@ type PROPS = ButtonElementType[Element] & {
 };
 
 const Button: React.FC<PROPS> = ({ element= "button", className = '', children, varient = 'primary', ...restProps }) => {
+    // const type = element === "button"?'button':'media_type';
     return createElement(
         element,
         { className: twMerge(`${styles[varient]} ${styles.button} `, className), ...restProps },

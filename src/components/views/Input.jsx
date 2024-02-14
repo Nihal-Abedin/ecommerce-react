@@ -15,9 +15,9 @@ const Input = ({
                 ' w-full bg-[#F7F8FA] rounded-sm border border-[#001F2D] flex items-center overflow-hidden',
                 className
             )}>
-            <div className=' w-full py-2 px-4'>
+            <div className=' w-full'>
                 <input
-                    className='outline-none border-none w-full'
+                    className='outline-none border-none w-full  py-2 px-4'
                     type={type}
                     defaultValue={defaultValue}
                     placeholder={placeholder}
