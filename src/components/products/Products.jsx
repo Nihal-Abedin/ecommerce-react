@@ -9,7 +9,6 @@ const Products = () => {
         console.log(error);
         return <p>Something went wrong</p>;
     }
-    console.log(data);
     if (isLoading) {
         return <p>Loading...</p>;
     }

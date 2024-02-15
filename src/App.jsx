@@ -12,7 +12,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Products from './components/products/Products';
 import ProductDetails from './components/productDetails/ProductDetails';
 import "./App.css";
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             retry: false,

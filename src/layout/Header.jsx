@@ -43,8 +43,8 @@ const Header = () => {
             />
 
             <div className='w-full flex gap-4 justify-end items-center' id='navbarSupportedContent'>
-                <Dropdown title='Account' options={accountOption} />
-                <Dropdown title='Vendor' options={vendorOption} />
+                <Dropdown title='Account' select={false} options={accountOption} />
+                <Dropdown title='Vendor' select={false} options={vendorOption} />
                 {!isLoggedIn ? (
                     <Link className={` ${isLoggedIn ? '' : 'hidden'}`} to='/login'>
                         Login

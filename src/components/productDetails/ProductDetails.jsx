@@ -1,23 +1,46 @@
 import { useSearchParams, useParams } from 'react-router-dom';
 import ProductImageView from './ProductImageView';
 import ProductDetailsView from './ProductDetailsView';
+import Tabs from '../views/Tabs';
 import { useProduct } from '../../queryHooks/queries/products';
-
+import Specifications from './subDetails/Specifications';
+const tabs = [
+    {
+        label: 'Secifications',
+        content: <Specifications/>,
+        key: 'tab1',
+    },
+    {
+        label: 'Vendor',
+        content: <p>Tab 2 content</p>,
+        key: 'tab2',
+    },
+    {
+        label: 'Review',
+        content: <p>Tab 3 content</p>,
+        key: 'tab3',
+    },
+    {
+        label: 'Q&A',
+        content: <p>Tab 4 content</p>,
+        key: 'tab4',
+    },
+];
 const ProductDetails = () => {
     const { slug } = useParams();
     const { data, isLoading } = useProduct(slug);
 
-    console.log(data, isLoading, slug);
-    const galleryImages = data&& data.data.gallery.map(img=>img.image)
     return (
-        <div className='-bg--color-grey-200 rounded grid grid-cols-2 p-4 gap-4'>
+        <div className=' p-4 '>
             {isLoading ? (
                 'Loading...'
             ) : (
                 <>
-                    {' '}
-                    <ProductImageView images={[...galleryImages, data.data.image]} />
-                    <ProductDetailsView details={data.data}/>
+                    <div className='-bg--color-grey-200 rounded grid grid-cols-1 md:grid-cols-2 p-4 gap-4 mb-4'>
+                        <ProductImageView />
+                        <ProductDetailsView />
+                    </div>
+                    <Tabs tabs={tabs}/>
                 </>
             )}
         </div>
