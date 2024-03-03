@@ -6,6 +6,7 @@ import { useProduct } from '../../queryHooks/queries/products';
 import Specifications from './subDetails/Specifications';
 import VendorDetails from './subDetails/VendorDetails';
 import ReviewDetails from './subDetails/ReviewDetails';
+import QA from './subDetails/QA';
 const tabs = [
     {
         label: 'Secifications',
@@ -24,7 +25,7 @@ const tabs = [
     },
     {
         label: 'Q&A',
-        content: <p>Tab 4 content</p>,
+        content: <QA/>,
         key: 'tab4',
     },
 ];
