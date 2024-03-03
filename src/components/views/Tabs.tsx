@@ -30,9 +30,7 @@ const Tabs: React.FC<TABS_PROPS> = ({ tabs }) => {
                         } cursor-pointer py-3 px-7 rounded-tl-md rounded-tr-md  transition-colors delay-[85ms] overflow-hidden after:transition  after:delay-75 after:duration-300 relative after:-bg--color-brand-500 after:w-full after:h-full after:absolute after:left-0  after:-z-20 after:top-0`}
                         onClick={() => {
                             setActiveTabIndex(i);
-                            setTimeout(() => {
                                 setActiveTab(tab.key);
-                            }, 100);
                         }}>
                         <p className='z-50'>{tab.label}</p>
                     </div>
