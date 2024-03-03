@@ -6,7 +6,7 @@ interface PROPS {
 }
 const Ratings: React.FC<PROPS> = ({ rating }) => {
     const flooredRating = Math.floor(rating);
-    const hasDecimal = rating % flooredRating;
+    const hasDecimal = rating % Math.ceil(rating);
     const stars = new Array(flooredRating).fill('', 0, flooredRating);
     return (
         <div className='flex gap-2 text-xl items-center text-[#6366f1]'>
