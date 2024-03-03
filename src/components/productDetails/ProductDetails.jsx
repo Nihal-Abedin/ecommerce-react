@@ -5,6 +5,7 @@ import Tabs from '../views/Tabs';
 import { useProduct } from '../../queryHooks/queries/products';
 import Specifications from './subDetails/Specifications';
 import VendorDetails from './subDetails/VendorDetails';
+import ReviewDetails from './subDetails/ReviewDetails';
 const tabs = [
     {
         label: 'Secifications',
@@ -18,7 +19,7 @@ const tabs = [
     },
     {
         label: 'Review',
-        content: <p>Tab 3 content</p>,
+        content: <ReviewDetails/>,
         key: 'tab3',
     },
     {

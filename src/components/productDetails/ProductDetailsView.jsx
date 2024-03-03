@@ -1,4 +1,5 @@
-import Input from '../views/Input';
+// import Input from '../views/Input';
+import Input from '../views/InputV2';
 import Dropdown from '../views/Dropdown';
 import Button from '../views/Button';
 import { SlBasket } from 'react-icons/sl';
@@ -28,7 +29,7 @@ const ProductDetailsView = () => {
             </main>
             <div className='flex flex-col justify-between'>
                 <section className='grid grid-cols-2 gap-6 text-xs w-fit'>
-                    <Input placeholder='Quantity' type='number' className='rounded' min={0} />
+                    <Input element='input' placeholder='Quantity' type='number' className='rounded'  />
                     <div className=' w-fit'>
                         <Dropdown title='Size' options={sizeOptions} className='border border-black' />
                     </div>
