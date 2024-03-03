@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/auth';
-import Input from '../components/views/Input';
+import Input from '../components/views/InputV2';
 import Dropdown from '../components/views/Dropdown';
 import { SlBasket } from 'react-icons/sl';
 import { FaRegUser } from 'react-icons/fa';
@@ -34,6 +34,7 @@ const Header = () => {
             </Link>
 
             <Input
+                element='input'
                 name='search'
                 className='w-[50%] rounded-md'
                 search={true}

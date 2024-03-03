@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/auth';
 import { register } from '../../utils/auth';
 import { useRegisTration } from '../../queryHooks/auth/useAuth';
-import Input from '../views/Input';
+import Input from '../views/InputV2';
 import Button from '../views/Button';
 
 const Register = () => {
