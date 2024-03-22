@@ -9,7 +9,7 @@ const Ratings: React.FC<PROPS> = ({ rating }) => {
     const hasDecimal = rating % Math.ceil(rating);
     const stars = new Array(flooredRating).fill('', 0, flooredRating);
     return (
-        <div className='flex gap-2 text-xl items-center text-[#6366f1]'>
+        <div className='flex gap-2 text-title-small-15-600 items-center text-[#6366f1]'>
             {stars.map((_,i) => (
                 <FaStar key={i}/>
             ))}

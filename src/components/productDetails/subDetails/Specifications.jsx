@@ -9,13 +9,13 @@ const Specifications = () => {
     return (
         <div className='grid grid-cols-1 max-w-md min-w-[30%] gap-3 auto-rows-min'>
             <div className='grid grid-cols-2'>
-                <h1 className='font-bold'>Category</h1>
-                <span>{prod.category.title}</span>
+                <h1 className='text-title-small-15-600'>Category</h1>
+                <span className='text-sub-title-medium-14-500 text-paragraph'>{prod.category.title}</span>
             </div>
             {prod.specifications.map((spec) => (
                 <div className='grid grid-cols-2' key={spec.content}>
-                    <h1 className='font-bold'>{spec.title}</h1>
-                    <span>{spec.content}</span>
+                    <h1 className='text-title-small-15-600'>{spec.title}</h1>
+                    <span className='text-sub-title-medium-14-500 text-paragraph'>{spec.content}</span>
                 </div>
             ))}
         </div>

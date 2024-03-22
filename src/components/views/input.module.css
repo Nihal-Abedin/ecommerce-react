@@ -1,0 +1,11 @@
+.large {
+    @apply p-3 text-lg
+}
+
+.medium {
+    @apply p-1 text-base
+}
+
+.small {
+    @apply p-1 text-xs
+}

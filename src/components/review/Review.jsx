@@ -25,18 +25,18 @@ const Review = () => {
     };
     return (
         <div>
-            <h1 className='text-2xl font-medium mb-3'>Create a New Review</h1>
+            <h1 className='text-title-large-20-600 mb-3'>Create a New Review</h1>
             <form className='flex flex-col gap-3'>
                 <label className='flex flex-col gap-3'>
-                    <h2 className='text-lg'>Username</h2>
+                    <h2 className='text-title-small-15-600'>Username</h2>
                     <InputV2 element='input' placeholder='Enter your Username' />
                 </label>
                 <label className='flex flex-col gap-3'>
-                    <h2 className='text-lg'>Review</h2>
+                    <h2 className='text-title-small-15-600'>Review</h2>
                     <InputV2 element='textarea' resize={false} rows={5} placeholder='Write your Review' />
                 </label>
                 <label className='flex flex-col gap-3'>
-                    <h2 className='text-lg flex gap-2'>
+                    <h2 className='text-title-small-15-600 flex gap-2'>
                         Ratings
                         {!!rating ? <Ratings rating={rating} /> : null}
                     </h2>

@@ -39,7 +39,7 @@ const ProductDetails = () => {
                 'Loading...'
             ) : (
                 <>
-                    <div className='-bg--color-grey-200 rounded grid grid-cols-1 md:grid-cols-2 p-4 gap-4 mb-4'>
+                    <div className='bg-white rounded grid grid-cols-1 md:grid-cols-2 p-4 gap-4 mb-4'>
                         <ProductImageView />
                         <ProductDetailsView />
                     </div>

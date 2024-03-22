@@ -7,8 +7,8 @@ const VendorDetails = () => {
         <div className='flex gap-4 h-60 border-t border-b w-5/12'>
             <img src={vendorImage} className='w-40  object-cover' alt='vendore image' />
             <div className='h-full flex flex-col justify-center  gap-4 '>
-                <h3 className='text-2xl'>Name</h3>
-                <p className='text-lg text-gray-400'>Role</p>
+                <h3 className='text-title-large-20-600'>Name</h3>
+                <p className='text-title-small-15-600 text-gray-400'>Role</p>
                 <Ratings rating={rate}/>
                 <div className='flex gap-4'>
                     <Button element='button' type='button'  varient='primary'>

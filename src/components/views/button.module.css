@@ -1,15 +1,26 @@
 .button {
-    @apply outline-none border-0 rounded-md p-3 tracking-wide transition-all;
+    @apply outline-none border-0 rounded-md text-white  transition-all disabled:cursor-not-allowed hover:shadow-md  disabled:!bg-darkfox-gray;
 }
 
 .primary[type] {
-    @apply -bg--color-brand-500 -text--color-grey-0 font-medium hover:-bg--color-brand-600 hover:-shadow--shadow-md
+    @apply bg-primary-button   hover:bg-primary 
 }
 
 .ghost[type] {
-    @apply -bg--color-grey-50 -text--color-grey-900 font-medium hover:-bg--color-grey-100 hover:-shadow--shadow-md border -border-r--color-grey-300
+    @apply bg-paragraph   hover:bg-paragraph-light 
 }
 
 .danger[type] {
-    @apply -bg--color-red-700 -text--color-grey-0 font-medium hover:-bg--color-red-700 hover:-shadow--shadow-md
+    @apply bg-error   
+}
+.large {
+    @apply p-3 text-title-large-20-600
+}
+
+.medium {
+    @apply p-2 text-title-medium-16-600
+}
+
+.small {
+    @apply p-1 text-sub-title-large-15-600
 }

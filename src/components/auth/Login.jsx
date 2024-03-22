@@ -7,9 +7,11 @@ import { useAuthStore } from '../../store/auth';
 import { useLogin } from '../../queryHooks/auth/useAuth';
 import Input from '../views/InputV2';
 import Button from '../views/Button';
+import { useToast } from '../../utils/hooks/UseToast';
 
 const Login = () => {
     const navigate = useNavigate();
+    const toast = useToast()
     const [email, setEmail] = useState('nihal@gmail.com');
     const [password, setPassword] = useState('testing1234');
 
@@ -25,8 +27,10 @@ const Login = () => {
                     navigate('/', { replace: true });
                 },
                 onError: (err) => {
-                    console.log(err, 'ASDSA');
-                    alert(err.error);
+                    toast.fire({
+                        icon:'error',
+                        title:err.error,
+                    })
                 },
             }
         );

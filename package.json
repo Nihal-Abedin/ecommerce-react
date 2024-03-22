@@ -11,6 +11,7 @@
         "format": "npx prettier --write ."
     },
     "dependencies": {
+        "@tailwindcss/forms": "^0.5.7",
         "@tanstack/react-query": "^5.17.10",
         "@tanstack/react-query-devtools": "^5.17.10",
         "axios": "^1.6.5",
@@ -26,6 +27,7 @@
         "react-photo-album": "^2.3.0",
         "react-router-dom": "^6.21.1",
         "simple-zustand-devtools": "^1.1.0",
+        "sweetalert": "^2.1.2",
         "sweetalert2": "^11.10.2",
         "tailwind-merge": "^2.2.0",
         "zustand": "^4.4.7"
