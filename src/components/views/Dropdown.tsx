@@ -70,14 +70,14 @@ const Dropdown: React.FC<SelectProps> = ({
                     )}
                 </Button>
                 <div
-                    className={`max-h-36 overflow-y-auto  rounded-md absolute bg-white w-full divide-y-2 transition-all shadow-lg ${
-                        showOptions ? 'opacity-100 visible translate-y-100 ' : 'opacity-0 invisible -translate-y-1'
+                    className={`max-h-36 overflow-y-auto border border-darkfox-purple-light  rounded-md absolute bg-white w-full divide-y-2 transition-all shadow-xl ${
+                        showOptions ? 'opacity-100 visible translate-y-[5%] ' : 'opacity-0 invisible -translate-y-1'
                     }`}>
                     {options.map((op) => (
                         <p
                             key={op.label}
                             onClick={() => handleSelect(op)}
-                            className='p-3 flex items-center gap-3 cursor-pointer hover:bg-primary-button-10 text-title-small-15-600 transition-colors'>
+                            className='p-3 flex items-center gap-3 cursor-pointer hover:bg-primary-button-10 hover:text-primary text-sub-title-medium-14-600 text-darkfox-semidark-gray transition-colors'>
                             {op.icon ? <op.icon className='text-xl' /> : null}
                             {op.label}
                         </p>

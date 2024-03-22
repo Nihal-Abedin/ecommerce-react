@@ -24,12 +24,12 @@ const Carousel: React.FC<CAROUSEL_TYPE> = ({ images, isLoading }) => {
                     <div
                         className={`w-full  grid grid-flow-col ${
                             images?.length >= maxShowCount ? '' : 'justify-center'
-                        } gap-5 auto-cols-max bg-gray-500 bg-opacity-25 overflow-hidden rounded-md p-4`}>
+                        } gap-5 auto-cols-max bg-darkfox-ash bg-opacity-25 overflow-hidden rounded-md p-4`}>
                         {images?.map((item, i) => (
                             <div
                                 key={i}
                                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                                className='relative -bg--color-grey-100 w-96 object-cover  transition-all rounded-2xl overflow-hidden'>
+                                className='relative  w-[241px] h-[241px] object-cover  transition-all rounded-2xl overflow-hidden'>
                                 <img
                                     title={item.title}
                                     src={item.image}
@@ -37,7 +37,7 @@ const Carousel: React.FC<CAROUSEL_TYPE> = ({ images, isLoading }) => {
                                     className=' w-full h-full object-cover rounded-2xl'
                                 />
                                 <div className='absolute bottom-0 text-white h-full w-full  bg-gradient-to-t from-[-30%] from-black flex items-end p-4'>
-                                    <h1 className='font-semibold text-2xl'>{item.title}</h1>
+                                    <h1 className='text-title-large-18-600'>{item.title}</h1>
                                 </div>
                             </div>
                         ))}

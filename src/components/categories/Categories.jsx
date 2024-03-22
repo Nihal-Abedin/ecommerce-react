@@ -11,7 +11,7 @@ const Categories = () => {
 
     return (
         <div className='flex flex-col gap-12 mt-9'>
-            <h1 className='text-center font-semibold text-4xl '>Categories</h1>
+            <h1 className='text-center text-title-large-22-600 '>Categories</h1>
             <Carousel images={filterdImages} isLoading={isPending} />
         </div>
     );

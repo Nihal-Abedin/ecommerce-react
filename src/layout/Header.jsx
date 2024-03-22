@@ -35,7 +35,7 @@ const Header = () => {
 
     return (
         <div className='w-full fixed flex items-center py-2 px-4 border-b border-darkfox-gray-border bg-white z-10'>
-            <Link className='w-36 font-medium' to='/'>
+            <Link className='w-36 text-title-large-18-600' to='/'>
                 My Shop
             </Link>
 
