@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Products from './components/products/Products';
 import ProductDetails from './components/productDetails/ProductDetails';
 import "./App.css";
+import Cart from './components/cart/Cart';
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -40,6 +41,7 @@ const App = () => {
                         <Route path='/dashboard' element={<Dashboard />} />
                         <Route path='/' element={<Products />} />
                         <Route path='/detail/:slug' element={<ProductDetails />} />
+                        <Route path='/cart' element={<Cart/>}/>
                     </Route>
                 </Routes>
             </QueryClientProvider>
