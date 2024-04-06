@@ -128,7 +128,7 @@ export const getRefreshToken = async () => {
     
         return data;
     } catch(err){
-        return {error:err?.response.data?.detail}
+        return {error:err?.response?.data?.detail}
     }
 };
 

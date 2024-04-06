@@ -7,21 +7,19 @@ const max = 5;
 const Review = () => {
     const [rating, setRating] = useState(0);
     const handleNumberInput = (e) => {
-        const value = e.currentTarget.value
+        const value = e.currentTarget.value;
         if (+value > max) {
-            
             setRating(max);
-            e.currentTarget.value = max
+            e.currentTarget.value = max;
             return;
         }
         if (+value < min) {
             setRating(min);
-            e.currentTarget.value = min
+            e.currentTarget.value = min;
 
             return;
         }
-
-        setRating(+value);
+        setRating(value);
     };
     return (
         <div>
@@ -33,7 +31,13 @@ const Review = () => {
                 </label>
                 <label className='flex flex-col gap-3'>
                     <h2 className='text-title-small-15-600'>Review</h2>
-                    <InputV2 element='textarea' resize={false} rows={5} placeholder='Write your Review' />
+                    <InputV2
+                        element='textarea'
+                        resize={false}
+                        rows={5}
+                        onChange={() => console.log('as')}
+                        placeholder='Write your Review'
+                    />
                 </label>
                 <label className='flex flex-col gap-3'>
                     <h2 className='text-title-small-15-600 flex gap-2'>
@@ -51,7 +55,9 @@ const Review = () => {
                         type='number'
                     />
                 </label>
-                <Button element='button' varient='primary' className='w-fit mt-4 self-end' type='submit'>Submit</Button>
+                <Button element='button' varient='primary' className='w-fit mt-4 self-end' type='submit'>
+                    Submit
+                </Button>
             </form>
         </div>
     );

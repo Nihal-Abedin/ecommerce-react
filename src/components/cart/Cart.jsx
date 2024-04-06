@@ -8,6 +8,7 @@ const Cart = () => {
         <form onSubmit={(e)=>{
             e.preventDefault();
             console.log("PRoceed")
+            console.log(e)
         }} className='grid grid-cols-[2fr,1fr] '>
             <div>
                 <CartList />

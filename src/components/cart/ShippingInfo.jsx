@@ -9,7 +9,7 @@ const ShippingInfo = () => {
                 <Input element='input' label='Address' name='address' rules={addressRules} required />
                 <Input element='input' label='City' required />
                 <Input element='input' label='State' />
-                <Input element='input' label='Country' />
+                <Input element='input' label='Country' required/>
             </div>
         </div>
     );

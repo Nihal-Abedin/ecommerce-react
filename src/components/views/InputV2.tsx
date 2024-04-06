@@ -22,13 +22,13 @@ type PROPS = InputElementType[Element] & {
     resize?: boolean;
     size?: 'small' | 'medium' | 'large';
     label?: string;
-    rules?: [
-        {
-            validate: (val: string | number) => boolean;
-            msg: () => string;
-            required?: boolean;
-        },
-    ];
+    rules?: {
+        validate: (val: string | number) => boolean;
+        msg: () => string;
+        required?: boolean;
+    }[];
+    showValidationMessages?: boolean;
+    onChange?: (val: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const InputV2: React.FC<PROPS> = ({
@@ -38,18 +38,40 @@ const InputV2: React.FC<PROPS> = ({
     resize = true,
     size = 'medium',
     label = '',
+    rules = [],
+    showValidationMessages = true,
     ...restProps
 }) => {
     const [validationMessages, setValidationMessage] = useState<string[] | undefined>();
-
+    useEffect(() => {
+        rules = [
+            ...rules,
+            {
+                validate: function (val: string | number) {
+                    if (!restProps.required) return true;
+                    if (!val) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                msg: function () {
+                    return `is required!`;
+                },
+            },
+        ];
+    }, [validationMessages]);
     const handleValidation = (e: React.FormEvent<HTMLInputElement>) => {
         let msgs: string[] = [];
-        restProps.rules?.forEach((rule) => {
+        const val = e.currentTarget.value;
+        rules?.forEach((rule) => {
             if (!rule.validate(e.currentTarget.value)) {
                 msgs.push(`${label} ${rule.msg()}`);
             }
         });
         setValidationMessage(msgs);
+        restProps.onChange?.(e);
+        return val;
     };
     return (
         <div className={`${className} `}>
@@ -77,7 +99,13 @@ const InputV2: React.FC<PROPS> = ({
                     </Button>
                 ) : null}
             </div>
-            {validationMessages?.map((msg) => <p key={msg} className='text-error text-sub-title-small-13-600 pl-2'>{msg}</p>)}
+            {showValidationMessages
+                ? validationMessages?.map((msg) => (
+                      <p key={msg} className='text-error text-sub-title-small-13-600 pl-2'>
+                          {msg}
+                      </p>
+                  ))
+                : null}
         </div>
     );
 };

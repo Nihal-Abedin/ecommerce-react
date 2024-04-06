@@ -29,19 +29,7 @@ export const emailRules: Rules = [
         msg: function () {
             return `is not valid!`;
         },
-    },
-    {
-        validate: function (val: string) {
-            if (!val) {
-                return false;
-            } else {
-                return true;
-            }
-        },
-        msg: function () {
-            return `is required!`;
-        },
-    },
+    }
 ];
 export const nameRules = [
     {
@@ -56,7 +44,7 @@ export const nameRules = [
         msg: function () {
             return `must be at least ${this.minLength} characters`;
         },
-    },
+    }
 ];
 export const phoneRules = [
     {

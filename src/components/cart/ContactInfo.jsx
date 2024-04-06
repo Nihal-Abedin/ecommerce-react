@@ -10,7 +10,7 @@ const ContactInfo = () => {
                 <div className='col-[1/3]'>
                     <Input element='input' label='Full name' rules={nameRules} required/>
                 </div>
-                <Input element='input' label='Email' type='email' rules={emailRules} required/>
+                <Input element='input' onSubmit={(e)=>console.log(e)} label='Email' onChange={(e)=>console.log(e)} type='email' rules={emailRules} required/>
                 <Input element='input' label='Mobile' rules={phoneRules} required/>
             </div>
         </div>

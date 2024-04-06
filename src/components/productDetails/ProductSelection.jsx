@@ -56,7 +56,6 @@ const ProductSelection = ({prod, compact=false}) => {
             }
         );
     };
-
     useEffect(() => {
         setSelectedProduct((prev) => ({ ...prev, country }));
     }, [country]);
@@ -69,7 +68,7 @@ const ProductSelection = ({prod, compact=false}) => {
                     min={minQty}
                     size='small'
                     defaultValue={minQty}
-                    onChange={(e) => setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }))}
+                    onChange={(e)=>setSelectedProduct((prev) => ({ ...prev, qty: +e }))}
                     type='number'
                 />
                 {sizeOptions.length > 0 && (
