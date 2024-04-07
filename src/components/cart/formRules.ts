@@ -20,7 +20,9 @@ type Rules =
 export const emailRules: Rules = [
     {
         validate: function (val: string) {
-            if (!isValidEmail(val)) {
+            if (!val) {
+                return true
+            } else if (!isValidEmail(val)) {
                 return false;
             } else {
                 return true;
@@ -35,7 +37,9 @@ export const nameRules = [
     {
         minLength: 5,
         validate: function (val: string) {
-            if (val.length < this.minLength) {
+            if (!val) {
+                return true
+            } else if (val.length < this.minLength) {
                 return false;
             } else {
                 return true;
@@ -49,7 +53,9 @@ export const nameRules = [
 export const phoneRules = [
     {
         validate: function (val: string) {
-            if (!isValidPhoneNumber(val)) {
+            if (!val) {
+                return true
+            } else if (!isValidPhoneNumber(val)) {
                 return false;
             } else {
                 return true;
@@ -64,7 +70,9 @@ export const addressRules = [
     {
         minLength: 10,
         validate: function (val: string) {
-            if (val.length < this.minLength) {
+            if (!val) {
+                return true
+            } else if (val.length < this.minLength) {
                 return false;
             } else {
                 return true;
