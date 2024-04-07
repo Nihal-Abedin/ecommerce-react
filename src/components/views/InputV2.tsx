@@ -5,15 +5,15 @@ import { FaSearch } from 'react-icons/fa';
 
 // @ts-ignore
 import styles from './input.module.css';
-type Element = 'input' | 'textarea';
+export type InputElement = 'input' | 'textarea';
 
 interface InputElementType {
-    input: React.InputHTMLAttributes<Element>;
-    textarea: React.TextareaHTMLAttributes<Element>;
+    input: React.InputHTMLAttributes<InputElement>;
+    textarea: React.TextareaHTMLAttributes<InputElement>;
 }
 
-type PROPS = InputElementType[Element] & {
-    element: Element;
+export type InputProps = InputElementType[InputElement] & {
+    element: InputElement;
     className?: string;
     children?: React.ReactNode;
     isLoading?: boolean;
@@ -29,9 +29,11 @@ type PROPS = InputElementType[Element] & {
     }[];
     showValidationMessages?: boolean;
     onChange?: (val: React.FormEvent<HTMLInputElement>) => void;
+    runValidatiors?: boolean;
+    isRequired?: boolean;
 };
 
-const InputV2: React.FC<PROPS> = ({
+const InputV2: React.FC<InputProps> = ({
     element = 'input',
     className = '',
     search = false,
@@ -40,15 +42,25 @@ const InputV2: React.FC<PROPS> = ({
     label = '',
     rules = [],
     showValidationMessages = true,
+    runValidatiors = false,
+    isRequired = false,
+    required = false,
     ...restProps
 }) => {
     const [validationMessages, setValidationMessage] = useState<string[] | undefined>();
+    const [inputValue, setInputVal] = useState<string | number>('');
     useEffect(() => {
-        rules = [
+        if (runValidatiors) {
+            checkValidatiors(inputValue);
+        }
+    }, [runValidatiors, inputValue]);
+    const checkValidatiors = (val: string | number) => {
+        let msgs: string[] = [];
+        [
             ...rules,
             {
                 validate: function (val: string | number) {
-                    if (!restProps.required) return true;
+                    if (!required && !isRequired) return true;
                     if (!val) {
                         return false;
                     } else {
@@ -59,17 +71,17 @@ const InputV2: React.FC<PROPS> = ({
                     return `is required!`;
                 },
             },
-        ];
-    }, [validationMessages]);
-    const handleValidation = (e: React.FormEvent<HTMLInputElement>) => {
-        let msgs: string[] = [];
-        const val = e.currentTarget.value;
-        rules?.forEach((rule) => {
-            if (!rule.validate(e.currentTarget.value)) {
-                msgs.push(`${label} ${rule.msg()}`);
+        ]?.forEach((rule) => {
+            if (!rule.validate(val)) {
+                msgs.push(`${label || restProps.name} ${rule.msg()}`);
             }
         });
         setValidationMessage(msgs);
+    };
+    const handleValidation = (e: React.FormEvent<HTMLInputElement>) => {
+        const val = e.currentTarget.value;
+        setInputVal(val);
+        checkValidatiors(val);
         restProps.onChange?.(e);
         return val;
     };
@@ -78,7 +90,7 @@ const InputV2: React.FC<PROPS> = ({
             {label ? (
                 <p className='text-sub-title-large-15-600 mb-3 relative'>
                     {label}
-                    {restProps.required ? <span className='text-error absolute -top-1 pl-1'>*</span> : null}
+                    {required || isRequired ? <span className='text-error absolute -top-1 pl-1'>*</span> : null}
                 </p>
             ) : null}
             <div
@@ -90,6 +102,7 @@ const InputV2: React.FC<PROPS> = ({
                     className: `!outline-none text-title-small-15-600  border-none w-full  py-2 px-4 ${
                         resize ? 'resize' : 'resize-none'
                     } ${styles[size]}`,
+                    required,
                     ...restProps,
                     onChange: handleValidation,
                 })}
