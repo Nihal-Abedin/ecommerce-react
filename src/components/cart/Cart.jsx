@@ -3,35 +3,38 @@ import CartSummery from './CartSummery';
 import ContactInfo from './ContactInfo';
 import ShippingInfo from './ShippingInfo';
 import Form from '../views/form/Form';
+import { useAuthStore } from '../../store/auth';
+import { useCartList } from '../../queryHooks/queries/cart';
+import { useGetRandomCartId } from '../../utils/hooks/useGetRandomCardId';
 const Cart = () => {
-    // return (
-    //     <form onSubmit={(e)=>{
-    //         e.preventDefault();
-    //         console.log("PRoceed")
-    //         console.log(e)
-    //     }} className='grid grid-cols-[2fr,1fr] '>
-    //         <div>
-    //             <CartList />
-    //             <ContactInfo/>
-    //             <ShippingInfo/>
-    //         </div>
-    //         <CartSummery />
-    //     </form>
-    // );
-
+    const [{ user_id }] = useAuthStore((state) => [state.user()]);
+    const cartId = useGetRandomCartId();
+    const { data, isLoading } = useCartList(cartId, user_id);
+    console.log(data);
     return (
-        <Form
-            onSubmit={(data) => {
-                console.log('PRoceed', data);
-              
-            }} className='grid grid-cols-[2fr,1fr] '>
-            <div>
-                <CartList />
-                <ContactInfo />
-                <ShippingInfo />
-            </div>
-            <CartSummery />
-        </Form>
+        <>
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <Form
+                    onSubmit={(data) => {
+                        console.log('PRoceed', data);
+                    }}
+                    className='grid grid-cols-[2fr,1fr] '>
+                    <div>
+                        <CartList carts = {data.data} />
+                        {data.data.length >= 1 ? (
+                            <>
+                                <ContactInfo />
+                                <ShippingInfo />
+                            </>
+                        ) : null}
+                    </div>
+
+                    <CartSummery />
+                </Form>
+            )}
+        </>
     );
 };
 
