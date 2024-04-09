@@ -1,6 +1,8 @@
 import FormInput from './FormInput';
 import { InputProps } from '../InputV2';
 import { createContext, createElement, ReactNode, useState } from 'react';
+// @ts-ignore
+import { useToast } from '../../../utils/hooks/UseToast.jsx';
 
 type Element = 'form';
 interface Template {
@@ -9,9 +11,20 @@ interface Template {
 interface FormElementType {
     form: React.FormHTMLAttributes<Element>;
 }
+
+interface FormValues {
+    [key: string]: {
+        isRequired: boolean;
+        value: string | number;
+        isValid: boolean;
+    };
+}
+interface SubmitValuesTypes {
+    [key: string]: string | number;
+}
 type Props = FormElementType[Element] & {
     children: ReactNode;
-    onSubmit: (data: any) => void;
+    onSubmit: (data: SubmitValuesTypes) => void;
 };
 type InitialvalueType = {
     runValidators?: boolean;
@@ -22,31 +35,32 @@ let Initialvalue = {
     runValidators: false,
     setformValues: () => null,
 };
-interface FormValues {
-    [key: string]: {
-        isRequired: boolean;
-        value: string | number;
-    };
-}
 export const FormContext = createContext<InitialvalueType>(Initialvalue);
 const Form: React.FC<Props> & Template = ({ children, ...restProps }) => {
+    const toast = useToast();
     const [runValidators, setRunValidators] = useState(false);
     const [formValues, setformValues] = useState<FormValues>({});
+    console.log(formValues);
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         let valid = false;
+        let formatedData = {};
         for (const d in formValues) {
-            // Object.prototype.hasOwnProperty.call(formValues, key)
-            if (formValues?.[d].isRequired && !formValues?.[d].value) {
+            if (formValues?.[d].isRequired && !formValues[d].isValid) {
                 setRunValidators(true);
+                toast.fire({
+                    icon: 'error',
+                    title: 'Please fill up the required fileds (*).',
+                });
                 return;
             } else {
+                formatedData = { ...formatedData, [d]: formValues?.[d].value };
                 valid = true;
                 setRunValidators(false);
             }
         }
         if (valid) {
-            restProps?.onSubmit(formValues);
+            restProps?.onSubmit(formatedData);
         }
     };
     return (

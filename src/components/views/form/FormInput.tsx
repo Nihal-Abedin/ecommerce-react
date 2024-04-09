@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import InputV2, { InputProps, InputElement } from '../InputV2';
 import { FormContext } from './Form';
 
@@ -12,14 +12,17 @@ const FormInput: React.FC<InputProps & FormInputProps> = ({
     ...restProps
 }) => {
     const { runValidators, setformValues } = useContext(FormContext);
+    const [isValid, setIsvalid] = useState(false);
+    const [inputVal, setInputVal] = useState('');
     const handleChange = (e: React.ChangeEvent<InputElement> | React.FormEvent<HTMLInputElement>) => {
         const value = (e.target as HTMLInputElement).value;
         const name = (e.target as HTMLInputElement).name;
-        setformValues?.((val) => ({ ...val, [name]: { value, isRequired } }));
+        setInputVal(value)
+        setformValues?.((val) => ({ ...val, [name]: { value, isRequired, isValid } }));
     };
     useEffect(() => {
-        setformValues?.((val) => ({ ...val, [name]: { value: '', isRequired } }));
-    }, []);
+        setformValues?.((val) => ({ ...val, [name]: {  value: inputVal, isRequired, isValid } }));
+    }, [inputVal]);
     return (
         <InputV2
             element={element}
@@ -28,6 +31,7 @@ const FormInput: React.FC<InputProps & FormInputProps> = ({
             {...restProps}
             name={name}
             isRequired={isRequired}
+            isValid={setIsvalid}
         />
     );
 };

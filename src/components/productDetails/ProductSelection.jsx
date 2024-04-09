@@ -15,29 +15,29 @@ import { useAddToCart } from '../../queryHooks/mutations/product';
 import { useToast } from '../../utils/hooks/UseToast';
 
 const minQty = 1;
-const ProductSelection = ({prod, compact=false}) => {
+const ProductSelection = ({ prod, compact = false }) => {
     const country = useGetCountry();
     const cartId = useGetRandomCartId();
     const sizeOptions = prod.size.map((size) => ({ label: size.name, ...size }));
     const user = useAuthStore((state) => state.user());
     const { mutate } = useAddToCart();
-    const toast = useToast()
+    const toast = useToast();
 
     const [selectedProduct, setSelectedProduct] = useState({
         product_id: prod.id,
         price: prod.old_price,
         user_id: user.user_id,
         shipping_amount: prod.shipping_amount,
-        qty: minQty
+        qty: minQty,
     });
     const [selectedSize, setSelectedSize] = useState();
 
     const handleAddToCart = async () => {
         if ((prod.color.length > 0 && !selectedProduct.color) || (sizeOptions.length > 0 && !selectedSize?.size)) {
             toast.fire({
-                icon:'info',
-                title:'Please select size and color',
-            })
+                icon: 'info',
+                title: 'Please select size and color',
+            });
             return;
         }
         mutate(
@@ -46,9 +46,9 @@ const ProductSelection = ({prod, compact=false}) => {
                 onSuccess: (data) => {
                     console.log(data);
                     toast.fire({
-                        icon:'success',
-                        title:data.data.message
-                    })
+                        icon: 'success',
+                        title: data.data.message,
+                    });
                 },
                 onError: (err) => {
                     console.log(err);
@@ -60,7 +60,7 @@ const ProductSelection = ({prod, compact=false}) => {
         setSelectedProduct((prev) => ({ ...prev, country }));
     }, [country]);
     return (
-        <div className={`flex flex-col h-full  self-end ${compact?'justify-center gap-2':' justify-evenly'}`}>
+        <div className={`flex flex-col h-full  self-end ${compact ? 'justify-center gap-2' : ' justify-evenly'}`}>
             <section className={`flex flex-col gap-3 w-fit`}>
                 <Input
                     element='input'
@@ -68,7 +68,9 @@ const ProductSelection = ({prod, compact=false}) => {
                     min={minQty}
                     size='small'
                     defaultValue={minQty}
-                    onChange={(e)=>setSelectedProduct((prev) => ({ ...prev, qty: +e }))}
+                    onChange={(e) => {
+                        setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }))
+                    }}
                     type='number'
                 />
                 {sizeOptions.length > 0 && (
@@ -113,4 +115,4 @@ const ProductSelection = ({prod, compact=false}) => {
         </div>
     );
 };
-export default ProductSelection
+export default ProductSelection;

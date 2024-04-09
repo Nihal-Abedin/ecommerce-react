@@ -31,6 +31,7 @@ export type InputProps = InputElementType[InputElement] & {
     onChange?: (val: React.FormEvent<HTMLInputElement>) => void;
     runValidatiors?: boolean;
     isRequired?: boolean;
+    isValid: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const InputV2: React.FC<InputProps> = ({
@@ -45,6 +46,7 @@ const InputV2: React.FC<InputProps> = ({
     runValidatiors = false,
     isRequired = false,
     required = false,
+    isValid = () => null,
     ...restProps
 }) => {
     const [validationMessages, setValidationMessage] = useState<string[] | undefined>();
@@ -56,8 +58,8 @@ const InputV2: React.FC<InputProps> = ({
     }, [runValidatiors, inputValue]);
     const checkValidatiors = (val: string | number) => {
         let msgs: string[] = [];
+        let isValid = false;
         [
-            ...rules,
             {
                 validate: function (val: string | number) {
                     if (!required && !isRequired) return true;
@@ -71,17 +73,23 @@ const InputV2: React.FC<InputProps> = ({
                     return `is required!`;
                 },
             },
+            ...rules,
         ]?.forEach((rule) => {
             if (!rule.validate(val)) {
+                isValid = false;
                 msgs.push(`${label || restProps.name} ${rule.msg()}`);
+            } else {
+                isValid = true;
             }
         });
         setValidationMessage(msgs);
+        return isValid;
     };
     const handleValidation = (e: React.FormEvent<HTMLInputElement>) => {
         const val = e.currentTarget.value;
         setInputVal(val);
-        checkValidatiors(val);
+        const valid = checkValidatiors(val);
+        isValid?.(valid);
         restProps.onChange?.(e);
         return val;
     };

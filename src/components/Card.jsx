@@ -33,14 +33,13 @@ const Card = ({ product }) => {
                 </div>
             </section>
             <div
-                onClick={() => setshowOptions(false)}
-                className={`cursor-pointer absolute bg-darkfox-dark bg-opacity-45 left-0 top-0 transition-all backdrop-blur-md	 w-full h-full ${
+                className={`cursor-pointer z-[3]  absolute bg-darkfox-dark bg-opacity-45 left-0 top-0 transition-all backdrop-blur-md	 w-full h-full ${
                     showCartOptions ? 'opacity-100' : 'opacity-0 hidden'
                 }`}
             />
             <ClickOutside onClick={() => setshowOptions(false)}>
                 <div
-                    className={`overlay absolute transition-all ${
+                    className={`overlay z-10 absolute transition-all ${
                         showCartOptions ? '-translate-x-0' : 'translate-x-full'
                     } top-0 right-0 bg-purple-white bg-opacity-85 w-[70%] h-full flex items-center p-5`}>
                     <IoMdClose
