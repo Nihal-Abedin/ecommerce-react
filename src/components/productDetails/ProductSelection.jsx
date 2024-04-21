@@ -64,14 +64,14 @@ const ProductSelection = ({ prod, compact = false }) => {
             <section className={`flex flex-col gap-3 w-fit`}>
                 <Input
                     element='input'
+                    type='number'
                     placeholder='Quantity'
                     min={minQty}
                     size='small'
                     defaultValue={minQty}
                     onChange={(e) => {
-                        setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }))
+                        setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }));
                     }}
-                    type='number'
                 />
                 {sizeOptions.length > 0 && (
                     <div className=' w-fit'>

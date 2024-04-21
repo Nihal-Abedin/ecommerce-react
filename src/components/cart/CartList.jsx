@@ -8,15 +8,17 @@ import { SiAmericanexpress } from 'react-icons/si';
 import { FaCcMastercard } from 'react-icons/fa6';
 import { FaPaypal } from 'react-icons/fa';
 import { IoMdRefresh } from 'react-icons/io';
+import { useState } from 'react';
 
 const CartList = ({ carts }) => {
+    const [qty, setQty] = useState(0);
     return (
         <div className='flex flex-col pb-4'>
             {carts.length < 1 ? (
                 <h1 className='text-title-large-18-600 text-center'>Your Cart is Empty!</h1>
             ) : (
                 carts.map((d) => (
-                    <div className='flex justify-between py-3 border-b-2  border-darkfox-gray-border '>
+                    <div key={d.id} className='flex justify-between py-3 border-b-2  border-darkfox-gray-border '>
                         <div className='flex gap-3'>
                             <img
                                 src={d.product.image}
@@ -48,14 +50,22 @@ const CartList = ({ carts }) => {
                         </div>
                         <div className='flex flex-col justify-between items-center'>
                             <div className='flex gap-2 justify-center'>
-                                <Input element='input' type='number' min={1} defaultValue={d.qty} className='w-[30%]' />
+                                <Input
+                                    element='input'
+                                    type='number'
+                                    min={1}
+                                    max={10}
+                                    size='small'
+                                    defaultValue={d.qty}
+                                    onChange={(e) => setQty(+e.currentTarget.value)}
+                                />
                                 <Button element='button' type='button' varient='primary'>
                                     <IoMdRefresh />
                                 </Button>
                             </div>
                             <div className='flex gap-2  mb-7 '>
                                 <p className='text-gray-500'>Sub total:</p>
-                                <p className='text-title-large-18-600'>${d.sub_total}</p>
+                                <p className='text-title-large-18-600'>${(d.sub_total * (qty || d.qty)).toFixed(2)}</p>
                             </div>
                             {/* <p className=' text-sub-title-small-13-600 text-error mb-7'>You save 15%</p> */}
                         </div>

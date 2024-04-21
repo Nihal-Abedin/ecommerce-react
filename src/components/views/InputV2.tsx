@@ -12,27 +12,35 @@ interface InputElementType {
     textarea: React.TextareaHTMLAttributes<InputElement>;
 }
 
-export type InputProps = InputElementType[InputElement] & {
-    element: InputElement;
-    className?: string;
-    children?: React.ReactNode;
-    isLoading?: boolean;
-    search?: boolean;
-    type?: string;
-    resize?: boolean;
-    size?: 'small' | 'medium' | 'large';
-    label?: string;
-    rules?: {
-        validate: (val: string | number) => boolean;
-        msg: () => string;
-        required?: boolean;
-    }[];
-    showValidationMessages?: boolean;
-    onChange?: (val: React.FormEvent<HTMLInputElement>) => void;
-    runValidatiors?: boolean;
-    isRequired?: boolean;
-    isValid: React.Dispatch<React.SetStateAction<boolean>>;
-};
+// Define specific props for number inputs
+interface NumberInputProps {
+    type: 'number';
+    min: number;
+    max: number;
+}
+
+export type InputProps = InputElementType[InputElement] &
+    ({ element: InputElement } | NumberInputProps) & {
+        element: InputElement;
+        className?: string;
+        children?: React.ReactNode;
+        isLoading?: boolean;
+        search?: boolean;
+        type?: string;
+        resize?: boolean;
+        size?: 'small' | 'medium' | 'large';
+        label?: string;
+        rules?: {
+            validate: (val: string | number) => boolean;
+            msg: () => string;
+            required?: boolean;
+        }[];
+        showValidationMessages?: boolean;
+        onChange?: (val: React.FormEvent<HTMLInputElement>) => void;
+        runValidatiors?: boolean;
+        isRequired?: boolean;
+        isValid: React.Dispatch<React.SetStateAction<boolean>>;
+    };
 
 const InputV2: React.FC<InputProps> = ({
     element = 'input',
@@ -86,12 +94,24 @@ const InputV2: React.FC<InputProps> = ({
         return isValid;
     };
     const handleValidation = (e: React.FormEvent<HTMLInputElement>) => {
-        const val = e.currentTarget.value;
+        let val = e.currentTarget.value;
+        const { max, min } = restProps as NumberInputProps;
+
+        if (restProps.type === 'number') {
+            let newVal = parseFloat(val);
+
+            // Clamp value within the specified range
+            if (typeof min === 'number' && newVal < min) {
+                e.currentTarget.value = min.toString();
+            }
+            if (typeof max === 'number' && newVal > max) {
+                e.currentTarget.value = max.toString();
+            }
+        }
         setInputVal(val);
         const valid = checkValidatiors(val);
         isValid?.(valid);
         restProps.onChange?.(e);
-        return val;
     };
     return (
         <div className={`${className} `}>
@@ -116,7 +136,7 @@ const InputV2: React.FC<InputProps> = ({
                 })}
                 {search && element !== 'textarea' ? (
                     <Button element='button' className='py-2 px-4 text-paragraph bg-darkfox-gray-border rounded-none'>
-                        <FaSearch />
+                        <FaSearch size={20} />
                     </Button>
                 ) : null}
             </div>
