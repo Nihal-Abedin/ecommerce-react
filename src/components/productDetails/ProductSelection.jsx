@@ -3,8 +3,7 @@ import Dropdown from '../views/Dropdown';
 import Button from '../views/Button';
 import { SlBasket } from 'react-icons/sl';
 import { FaHeart } from 'react-icons/fa';
-import { queryClient } from '../../App';
-import { PRODUCT_KEYS } from '../../queryHooks/queryKeys';
+import { CART_KEYS, PRODUCT_KEYS } from '../../queryHooks/queryKeys';
 import { useParams } from 'react-router-dom';
 import Specifications from './subDetails/Specifications';
 import { useEffect, useState } from 'react';
@@ -13,7 +12,7 @@ import { useAuthStore } from '../../store/auth';
 import { useGetRandomCartId } from '../../utils/hooks/useGetRandomCardId';
 import { useAddToCart } from '../../queryHooks/mutations/product';
 import { useToast } from '../../utils/hooks/UseToast';
-
+import { queryClient } from '../../App';
 const minQty = 1;
 const ProductSelection = ({ prod, compact = false }) => {
     const country = useGetCountry();
@@ -22,7 +21,6 @@ const ProductSelection = ({ prod, compact = false }) => {
     const user = useAuthStore((state) => state.user());
     const { mutate } = useAddToCart();
     const toast = useToast();
-
     const [selectedProduct, setSelectedProduct] = useState({
         product_id: prod.id,
         price: prod.old_price,
@@ -43,15 +41,14 @@ const ProductSelection = ({ prod, compact = false }) => {
         mutate(
             { ...selectedProduct, ...selectedSize, cart_id: cartId },
             {
-                onSuccess: (data) => {
-                    console.log(data);
+                onSuccess: (data,v,c) => {
                     toast.fire({
                         icon: 'success',
                         title: data.data.message,
                     });
-                },
-                onError: (err) => {
-                    console.log(err);
+                    queryClient.refetchQueries({
+                        queryKey: CART_KEYS.lists(),
+                    });
                 },
             }
         );
@@ -64,14 +61,14 @@ const ProductSelection = ({ prod, compact = false }) => {
             <section className={`flex flex-col gap-3 w-fit`}>
                 <Input
                     element='input'
+                    type='number'
                     placeholder='Quantity'
                     min={minQty}
                     size='small'
                     defaultValue={minQty}
                     onChange={(e) => {
-                        setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }))
+                        setSelectedProduct((prev) => ({ ...prev, qty: +e.target.value }));
                     }}
-                    type='number'
                 />
                 {sizeOptions.length > 0 && (
                     <div className=' w-fit'>

@@ -22,7 +22,7 @@ const Cart = () => {
                     }}
                     className='grid grid-cols-[2fr,1fr] '>
                     <div>
-                        <CartList carts = {data.data} />
+                        <CartList carts={data.data} />
                         {data.data.length >= 1 ? (
                             <>
                                 <ContactInfo />
@@ -31,7 +31,7 @@ const Cart = () => {
                         ) : null}
                     </div>
 
-                    <CartSummery />
+                    <CartSummery cartId={cartId} userId={user_id} />
                 </Form>
             )}
         </>

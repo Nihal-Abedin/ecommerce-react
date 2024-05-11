@@ -5,22 +5,8 @@ import Ratings from '../views/Ratings';
 const min = 0;
 const max = 5;
 const Review = () => {
-    const [rating, setRating] = useState(0);
-    const handleNumberInput = (e) => {
-        const value = e.currentTarget.value;
-        if (+value > max) {
-            setRating(max);
-            e.currentTarget.value = max;
-            return;
-        }
-        if (+value < min) {
-            setRating(min);
-            e.currentTarget.value = min;
+    const [rating, setRating] = useState(1);
 
-            return;
-        }
-        setRating(value);
-    };
     return (
         <div>
             <h1 className='text-title-large-20-600 mb-3'>Create a New Review</h1>
@@ -49,8 +35,8 @@ const Review = () => {
                         placeholder='rating 0-5'
                         step={0.5}
                         defaultValue={rating}
-                        onChange={(e) => handleNumberInput(e)}
-                        min={0}
+                        onChange={(e) => setRating(+e.currentTarget.value)}
+                        min={rating}
                         max={5}
                         type='number'
                     />
