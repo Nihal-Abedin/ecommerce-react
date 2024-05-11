@@ -10,5 +10,7 @@ export const CATEGORIES_KEYS = {
 }
 
 export const CART_KEYS = {
-    lists: ["cart-lists"] as const
+    all: ['carts'] as const,
+    lists: () => [...CART_KEYS.all, "cart-lists"] as const,
+    details: () => [...CART_KEYS.lists(), 'cart-details'] as const,
 }

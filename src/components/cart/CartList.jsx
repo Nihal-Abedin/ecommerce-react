@@ -9,9 +9,75 @@ import { FaCcMastercard } from 'react-icons/fa6';
 import { FaPaypal } from 'react-icons/fa';
 import { IoMdRefresh } from 'react-icons/io';
 import { useState } from 'react';
+import { useAddToCart } from '../../queryHooks/mutations/product';
+import { CART_KEYS } from '../../queryHooks/queryKeys';
+import { useToast } from '../../utils/hooks/UseToast';
+import { queryClient } from '../../App';
+import { useCartDelete } from '../../queryHooks/mutations/cart';
 
 const CartList = ({ carts }) => {
     const [qty, setQty] = useState(0);
+
+    const { mutate } = useAddToCart();
+    const { mutate: deleteCart } = useCartDelete();
+    const toast = useToast();
+
+    const handleQuantityChange = (prod) => {
+        let timeoutId;
+
+        return (e) => {
+            clearTimeout(timeoutId);
+            setQty(+e.target.value);
+            timeoutId = setTimeout(() => {
+                mutate(
+                    {
+                        color: prod.color,
+                        country: prod.country,
+                        price: prod.price,
+                        product_id: prod.product.id,
+                        shipping_amount: prod.product.shipping_amount,
+                        user_id: prod.user.id,
+                        qty: +e.target.value,
+                        size: prod.size,
+                        cart_id: prod.cart_id,
+                    },
+                    {
+                        onSuccess: (data) => {
+                            console.log(data);
+                            toast.fire({
+                                icon: 'success',
+                                title: data.data.message,
+                            });
+                            queryClient.refetchQueries({
+                                queryKey: CART_KEYS.details(),
+                            });
+                        },
+                        onError: (err) => {
+                            console.log(err);
+                        },
+                    }
+                );
+            }, 1000);
+        };
+    };
+
+    const handleCartDelete = (item_id, cart_id, user_id) => {
+        console.log(item_id, cart_id, user_id);
+        deleteCart(
+            { item_id, cart_id, user_id },
+            {
+                onSuccess: () => {
+                    toast.fire({
+                        icon: 'success',
+                        title: 'Cart Deleted Successfully',
+                    });
+                    queryClient.refetchQueries({
+                        queryKey: CART_KEYS.all,
+                    });
+                },
+            }
+        );
+    };
     return (
         <div className='flex flex-col pb-4'>
             {carts.length < 1 ? (
@@ -28,7 +94,7 @@ const CartList = ({ carts }) => {
                             <div>
                                 <h1 className='text-title-large-20-600 mb-3'>{d.product.title}</h1>
                                 <h2 className='text-sub-title-medium-14-500 text-paragraph'>
-                                    Price: <span>${d.product.price}</span>
+                                    Price: <span>${d.product.old_price}</span>
                                 </h2>
                                 <h2 className='text-sub-title-medium-14-500 text-paragraph'>
                                     Size: <span>{d.size}</span>
@@ -37,7 +103,9 @@ const CartList = ({ carts }) => {
                                     Color: <span>{d.color}</span>
                                 </h2>
                                 <div className='flex gap-5 text-sub-title-medium-14-500 text-paragraph mt-7'>
-                                    <div className='flex items-center gap-1 hover:text-error cursor-pointer  transition-colors'>
+                                    <div
+                                        onClick={() => handleCartDelete(d.id, d.cart_id, d.user.id)}
+                                        className='flex items-center gap-1 hover:text-error cursor-pointer  transition-colors'>
                                         <MdDelete />
                                         <span className='underline'>Remove</span>
                                     </div>
@@ -57,7 +125,7 @@ const CartList = ({ carts }) => {
                                     max={10}
                                     size='small'
                                     defaultValue={d.qty}
-                                    onChange={(e) => setQty(+e.currentTarget.value)}
+                                    onChange={handleQuantityChange(d)}
                                 />
                                 <Button element='button' type='button' varient='primary'>
                                     <IoMdRefresh />
@@ -65,7 +133,7 @@ const CartList = ({ carts }) => {
                             </div>
                             <div className='flex gap-2  mb-7 '>
                                 <p className='text-gray-500'>Sub total:</p>
-                                <p className='text-title-large-18-600'>${(d.sub_total * (qty || d.qty)).toFixed(2)}</p>
+                                <p className='text-title-large-18-600'>${(d.price * (qty || d.qty)).toFixed(2)}</p>
                             </div>
                             {/* <p className=' text-sub-title-small-13-600 text-error mb-7'>You save 15%</p> */}
                         </div>
